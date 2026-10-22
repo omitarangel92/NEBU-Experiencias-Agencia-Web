@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import gsap from 'gsap';
 import {
-  ArrowUpRight, Bot, Check, ChevronLeft, ChevronRight, Clock, Clock3, Eye, Gauge, Globe,
-  HeartHandshake, LayoutTemplate, Menu, MessageCircle,
-  MessagesSquare, Moon, MoreHorizontal, Pause, Play, RefreshCw, Rocket, Search, Send,
-  Share2, Signal, Smartphone, Sparkles, Sun, WandSparkles, X, Zap,
+  ArrowUpRight, Bot, CalendarCheck, Check, ChevronLeft, ChevronRight, Clock, Clock3, Code, Database, Eye, Gauge, Globe,
+  HeartHandshake, Headset, LayoutTemplate, Layers, Mail, Menu, MessageCircle,
+  MessagesSquare, Moon, MoreHorizontal, Palette, Pause, Play, Plug, RefreshCw, Rocket, Search, Send, Server,
+  Share2, ShieldCheck, ShoppingCart, Signal, Smartphone, Sparkles, Sun, TrendingUp, WandSparkles, Wrench, X, Zap,
 } from 'lucide-react';
 
 import { FaFacebookF, FaGithub, FaInstagram, FaLinkedinIn, FaYoutube } from 'react-icons/fa6';
@@ -12,7 +13,7 @@ import { FaFacebookF, FaGithub, FaInstagram, FaLinkedinIn, FaYoutube } from 'rea
 const WA_NUMBER = '573106598981';
 const HOTMART = ['https://hotmart.com', 'https://hotmart.com', 'https://hotmart.com'];
 const EASE = [0.23, 1, 0.32, 1];
-const icons = { ArrowUpRight, Bot, Check, ChevronLeft, ChevronRight, Clock, Clock3, Eye, Gauge, Globe, HeartHandshake, LayoutTemplate, Menu, MessageCircle, MessagesSquare, Moon, MoreHorizontal, Pause, Play, RefreshCw, Rocket, Search, Send, Signal, Smartphone, Sparkles, Sun, WandSparkles, X, Zap };
+const icons = { ArrowUpRight, Bot, CalendarCheck, Check, ChevronLeft, ChevronRight, Clock, Clock3, Code, Database, Eye, Gauge, Globe, HeartHandshake, Headset, LayoutTemplate, Layers, Mail, Menu, MessageCircle, MessagesSquare, Moon, MoreHorizontal, Palette, Pause, Play, Plug, RefreshCw, Rocket, Search, Send, Server, ShieldCheck, ShoppingCart, Signal, Smartphone, Sparkles, Sun, TrendingUp, WandSparkles, Wrench, X, Zap };
 const nav = [['home', 'Home'], ['quienes-somos', 'Quiénes somos'], ['servicios', 'Servicios'], ['planes', 'Planes'], ['cursos', 'Cursos']];
 const slides = [
   { image: 'https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=2400&q=90', video: 'videos/hero-1.mp4', kicker: 'Automatización inteligente', title: 'Tecnología que atiende a tus clientes mientras tú descansas', copy: 'Diseñamos sitios web rápidos y asistentes de inteligencia artificial para WhatsApp y chat web que responden, orientan y venden las 24 horas.', action: 'Hablar por WhatsApp', message: 'Hola, quiero conocer los servicios de NebuExperiencias', points: [['Zap', 'Sitios que cargan en menos de 2 segundos'], ['Clock', 'Asistentes activos 24/7']] },
@@ -25,9 +26,10 @@ const services = [
   { icon: 'WandSparkles', art: 'service-art-redesign', title: 'Optimización y rediseño', copy: 'Renovamos tu sitio actual para que sea más rápido, más claro y mucho más fácil de usar desde el celular.', points: ['Auditoría de velocidad y usabilidad', 'Nuevo diseño sin perder tu posicionamiento', 'Mejoras de contenido y llamados a la acción'] },
 ];
 const plans = [
-  { name: 'Esencial', for: 'Para presentar tu negocio en internet.', price: <><span>Desde</span> $1.200.000 <small>COP</small></>, points: ['Sitio de hasta 5 secciones', 'Diseño adaptable a todo dispositivo', 'Botón directo a WhatsApp', '1 mes de soporte'], action: 'Elegir Esencial', message: 'Hola, me interesa el plan Esencial' },
-  { name: 'Crecimiento', for: 'Para atender y vender sin parar.', price: <><span>Desde</span> $2.800.000 <small>COP</small></>, points: ['Todo lo del plan Esencial', 'Asistente de IA en WhatsApp o chat web', 'Agendamiento o catálogo integrado', '3 meses de soporte y ajustes'], action: 'Elegir Crecimiento', message: 'Hola, me interesa el plan Crecimiento', featured: true },
-  { name: 'A la medida', for: 'Para proyectos con necesidades propias.', price: <>Cotización <small>personalizada</small></>, points: ['Plataformas y tiendas en línea', 'Automatizaciones con tus sistemas', 'Rediseño de sitios existentes', 'Acompañamiento continuo'], action: 'Pedir cotización', message: 'Hola, quiero una cotización a la medida' },
+  { name: 'Inicio', icon: 'Rocket', color: '#6aa9ff', for: 'Una página para salir a internet hoy.', price: '$690.000', action: 'Elegir Inicio', message: 'Hola, me interesa el plan Inicio', points: [['LayoutTemplate', 'Página única (landing) con el diseño de tu marca'], ['Smartphone', 'Adaptable a celular, tablet y computador'], ['Globe', 'Dominio .com incluido el primer año'], ['Server', 'Hosting veloz incluido el primer año'], ['ShieldCheck', 'Certificado SSL (candado de seguridad)'], ['MessageCircle', 'Botón directo a tu WhatsApp'], ['Headset', '15 días de soporte tras la publicación']] },
+  { name: 'Esencial', icon: 'LayoutTemplate', color: '#54d6ce', for: 'Para presentar tu negocio en internet.', price: '$1.200.000', action: 'Elegir Esencial', message: 'Hola, me interesa el plan Esencial', points: [['Palette', 'Diseño web personalizado de hasta 5 secciones'], ['Code', 'Desarrollo a la medida, rápido y ligero'], ['Globe', 'Dominio .com incluido el primer año'], ['Server', 'Hosting y certificado SSL por 1 año'], ['Mail', 'Hasta 3 correos corporativos'], ['Search', 'SEO básico para aparecer en Google'], ['Headset', '1 mes de soporte']] },
+  { name: 'Crecimiento', icon: 'TrendingUp', color: '#be8fff', for: 'Para atender y vender sin parar.', price: '$2.800.000', action: 'Elegir Crecimiento', message: 'Hola, me interesa el plan Crecimiento', featured: true, points: [['Layers', 'Todo lo del plan Esencial'], ['Bot', 'Asistente de IA en WhatsApp o chat web'], ['CalendarCheck', 'Agendamiento o catálogo integrado'], ['TrendingUp', 'Analítica y panel de resultados'], ['Gauge', 'SEO avanzado y velocidad optimizada'], ['Server', 'Hosting premium con copias de seguridad'], ['Headset', '3 meses de soporte y ajustes']] },
+  { name: 'A la medida', icon: 'Sparkles', color: '#ffb85c', for: 'Para proyectos con necesidades propias.', price: null, action: 'Pedir cotización', message: 'Hola, quiero una cotización a la medida', points: [['ShoppingCart', 'Tiendas en línea y plataformas web'], ['Plug', 'Integraciones con tus sistemas y pagos'], ['Bot', 'Automatizaciones e IA personalizadas'], ['Wrench', 'Rediseño de sitios existentes'], ['Database', 'Hosting dedicado e infraestructura'], ['Rocket', 'Capacitación para tu equipo'], ['Headset', 'Acompañamiento continuo']] },
 ];
 const courses = [
   { art: 'course-art-web', kicker: 'Diseño web', title: 'Tu primera web, paso a paso', copy: 'Publica un sitio profesional sin saber programar.', level: 'Nivel inicial', duration: '4 horas' },
@@ -195,35 +197,248 @@ function Services({ reduced }) {
 }
 
 function Plans({ reduced }) {
-  const isMobile = useMobileLayout();
-  const [activeIndex, setActiveIndex] = useState(1);
-  const touchStartX = useRef(null);
-  const goTo = (index) => setActiveIndex((index + plans.length) % plans.length);
+  const rootRef = useRef(null);
+  const stageRef = useRef(null);
+  const cardRefs = useRef([]);
+  const glowRefs = useRef([]);
+  const api = useRef({});
+  const [current, setCurrent] = useState(0);
+  const n = plans.length;
 
-  function handleTouchEnd(event) {
-    if (touchStartX.current === null) return;
-    const deltaX = event.changedTouches[0].clientX - touchStartX.current;
-    if (Math.abs(deltaX) > 48) goTo(activeIndex + (deltaX < 0 ? 1 : -1));
-    touchStartX.current = null;
-  }
+  useEffect(() => {
+    const root = rootRef.current;
+    const stage = stageRef.current;
+    const cards = cardRefs.current;
+    const glows = glowRefs.current;
+    const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let active = 0;
+    let busy = false;
+    let glowIdx = 0;
+    let auto = null;
+    let inView = false;
+    let hovering = false;
+    let introDone = false;
+
+    const q = (card, selector) => card.querySelector(selector);
+    const wrapD = (i) => {
+      let d = (i - active) % n;
+      if (d > n / 2) d -= n;
+      if (d < -n / 2) d += n;
+      return d;
+    };
+    const W = () => cards[0].offsetWidth;
+
+    function pose(d) {
+      const a = Math.abs(d);
+      const s = Math.sign(d);
+      const w = W();
+      return {
+        x: s * (Math.pow(a, 0.7) * w * 0.52),
+        y: a * w * 0.015,
+        z: -a * 150,
+        rotationY: -s * Math.min(a, 3) * 20,
+        rotationZ: s * a * 2.2,
+        scale: 1 - a * 0.035,
+        zIndex: 20 - a * 2,
+        autoAlpha: a > 3.1 ? 0 : 1,
+        shade: Math.min(0.18 + a * 0.2, 0.8) * (a ? 1 : 0),
+      };
+    }
+
+    function apply(card, p, vars = {}) {
+      const { shade, ...rest } = p;
+      const front = p.zIndex === 20;
+      const dur = vars.duration ?? 0;
+      gsap.to(card, { ...rest, ...vars });
+      gsap.to(q(card, '.plan-shade'), { opacity: shade, duration: dur, ease: vars.ease });
+      gsap.to(q(card, '.plan-body'), { autoAlpha: front ? 1 : 0, y: front ? 0 : 8, duration: dur * 0.7, delay: front ? dur * 0.4 : 0, ease: 'power2.out' });
+    }
+
+    function setGlow() {
+      const next = glows[glowIdx ^ 1];
+      next.style.setProperty('--glow', plans[active].color);
+      gsap.to(next, { opacity: 1, duration: 1.1, ease: 'power2.out' });
+      gsap.to(glows[glowIdx], { opacity: 0, duration: 1.1, ease: 'power2.out' });
+      glowIdx ^= 1;
+    }
+
+    function layout(dur = 0, ease = 'expo.out', skip) {
+      cards.forEach((card, i) => {
+        if (card !== skip) apply(card, pose(wrapD(i)), { duration: dur, ease, delay: dur ? Math.abs(wrapD(i)) * 0.03 : 0 });
+      });
+    }
+
+    function stopAuto() { auto?.kill(); auto = null; }
+    function restartAuto() {
+      stopAuto();
+      if (!still && inView && !hovering) auto = gsap.delayedCall(3.2, () => go(1));
+    }
+
+    function go(dir, fromDrag = 0) {
+      if (busy) return;
+      busy = true;
+      const out = cards[active];
+      active = (active + dir + n) % n;
+      setCurrent(active);
+      const dur = still ? 0.01 : 0.95;
+      layout(dur, 'expo.out', out);
+      const end = pose(wrapD(cards.indexOf(out)));
+      const w = W();
+      const { shade, autoAlpha, zIndex, ...endPose } = end;
+      gsap.timeline({ onComplete: () => { busy = false; } })
+        .to(out, { x: -dir * w * 1.05 + fromDrag * 0.2, y: -w * 0.06, rotationZ: -dir * 14, rotationY: dir * 30, scale: 0.96, duration: dur * 0.42, ease: 'power3.out' })
+        .set(out, { zIndex })
+        .to(out, { ...endPose, autoAlpha, duration: dur * 0.7, ease: 'expo.out' });
+      gsap.to(q(out, '.plan-shade'), { opacity: shade, duration: dur * 0.8, ease: 'power2.out' });
+      gsap.to(q(out, '.plan-body'), { autoAlpha: 0, duration: 0.2 });
+      setGlow();
+      restartAuto();
+    }
+
+    function jump(index) {
+      if (busy || index === active) return;
+      const d = ((index - active + n + n / 2) % n) - n / 2;
+      if (Math.abs(d) === 1) { go(d); return; }
+      active = index;
+      setCurrent(active);
+      layout(still ? 0 : 0.95);
+      setGlow();
+      restartAuto();
+    }
+
+    function intro() {
+      introDone = true;
+      cards.forEach((card, i) => {
+        const d = wrapD(i);
+        const { shade, ...p } = pose(d);
+        gsap.fromTo(card, { ...p, y: W() * 1.6, rotationZ: (d <= 0 ? -1 : 1) * 24, rotationY: 0, autoAlpha: 1 }, { ...p, duration: still ? 0 : 1.4, ease: 'expo.out', delay: still ? 0 : 0.07 * (3 - Math.abs(d)) });
+        gsap.set(q(card, '.plan-shade'), { opacity: shade });
+        gsap.set(q(card, '.plan-body'), { autoAlpha: d ? 0 : 1 });
+      });
+      setGlow();
+    }
+
+    cards.forEach((card, i) => {
+      const { shade, ...p } = pose(wrapD(i));
+      gsap.set(card, { ...p, xPercent: -50, yPercent: -50, autoAlpha: 0 });
+      gsap.set(q(card, '.plan-shade'), { opacity: shade });
+      gsap.set(q(card, '.plan-body'), { autoAlpha: i ? 0 : 1 });
+    });
+    glows[0].style.setProperty('--glow', plans[0].color);
+
+    const observer = new IntersectionObserver(([entry]) => {
+      inView = entry.isIntersecting;
+      if (inView && !introDone) intro();
+      if (inView) restartAuto(); else stopAuto();
+    }, { threshold: 0.25 });
+    observer.observe(root);
+
+    let startX = 0;
+    let dx = 0;
+    let lastX = 0;
+    let lastT = 0;
+    let vx = 0;
+    let pressed = false;
+    let dragging = false;
+
+    function onDown(event) {
+      if (busy || event.target.closest('a, button')) return;
+      pressed = true;
+      dragging = false;
+      startX = lastX = event.clientX;
+      dx = 0;
+      vx = 0;
+      lastT = performance.now();
+    }
+    function onMove(event) {
+      if (!pressed) return;
+      dx = event.clientX - startX;
+      if (!dragging && Math.abs(dx) > 6) {
+        dragging = true;
+        stage.setPointerCapture(event.pointerId);
+        stopAuto();
+      }
+      if (!dragging) return;
+      const now = performance.now();
+      vx = (event.clientX - lastX) / Math.max(1, now - lastT);
+      lastX = event.clientX;
+      lastT = now;
+      gsap.to(cards[active], { x: dx, rotationZ: dx * 0.04, rotationY: -dx * 0.03, duration: 0.35, ease: 'power3.out', overwrite: 'auto' });
+    }
+    function onUp() {
+      if (!pressed) return;
+      pressed = false;
+      if (!dragging) return;
+      dragging = false;
+      const threshold = W() * 0.22;
+      if (dx < -threshold || vx < -0.5) go(1, dx);
+      else if (dx > threshold || vx > 0.5) go(-1, dx);
+      else { apply(cards[active], pose(0), { duration: 0.9, ease: 'elastic.out(1,0.6)' }); restartAuto(); }
+    }
+    function onKey(event) {
+      if (event.key === 'ArrowRight') go(1);
+      if (event.key === 'ArrowLeft') go(-1);
+    }
+    const onEnter = () => { hovering = true; stopAuto(); };
+    const onLeave = () => { hovering = false; restartAuto(); };
+    const onResize = () => { if (introDone) layout(0); };
+
+    stage.addEventListener('pointerdown', onDown);
+    stage.addEventListener('pointermove', onMove);
+    stage.addEventListener('pointerup', onUp);
+    stage.addEventListener('pointercancel', onUp);
+    root.addEventListener('keydown', onKey);
+    root.addEventListener('pointerenter', onEnter);
+    root.addEventListener('pointerleave', onLeave);
+    root.addEventListener('focusin', onEnter);
+    root.addEventListener('focusout', onLeave);
+    window.addEventListener('resize', onResize);
+    api.current = { next: () => go(1), prev: () => go(-1), jump };
+
+    return () => {
+      stopAuto();
+      observer.disconnect();
+      gsap.killTweensOf([...cards, ...glows]);
+      stage.removeEventListener('pointerdown', onDown);
+      stage.removeEventListener('pointermove', onMove);
+      stage.removeEventListener('pointerup', onUp);
+      stage.removeEventListener('pointercancel', onUp);
+      root.removeEventListener('keydown', onKey);
+      root.removeEventListener('pointerenter', onEnter);
+      root.removeEventListener('pointerleave', onLeave);
+      root.removeEventListener('focusin', onEnter);
+      root.removeEventListener('focusout', onLeave);
+      window.removeEventListener('resize', onResize);
+    };
+  }, []);
 
   return <section className="section section-plans motion-surface" id="planes"><Flow reduced={reduced} /><div className="container">
     <Reveal className="section-head"><h2>Planes</h2><p className="lead">Elige el punto de partida. Siempre puedes crecer después.</p></Reveal>
-    <div className={`plans-grid ${isMobile ? 'plans-carousel' : ''}`} onTouchStart={(event) => { touchStartX.current = event.touches[0].clientX; }} onTouchEnd={handleTouchEnd}>
-      {plans.map((plan, index) => {
-        const active = index === activeIndex;
-        const distance = (index - activeIndex + plans.length) % plans.length;
-        const position = distance === 0 ? 'is-active' : distance === 1 ? 'is-next' : 'is-prev';
-        return <Reveal as={motion.article} className={`card plan ${plan.featured ? 'plan-featured' : ''} ${isMobile ? `plan-slide ${position}` : ''}`} key={plan.name} delay={index * 0.08} move={false} aria-hidden={isMobile && !active} inert={isMobile && !active}>
-          {plan.featured && <span className="badge">Más elegido</span>}<h3>{plan.name}</h3><p className="plan-for">{plan.for}</p><p className="price">{plan.price}</p><ul className="checks">{plan.points.map((point) => <li key={point}><Icon name="Check" />{point}</li>)}</ul><Wa className={`btn ${plan.featured ? 'btn-primary' : ''}`} message={plan.message}>{plan.action}</Wa>
-        </Reveal>;
-      })}
+    <div className="plans-deck" ref={rootRef} tabIndex={-1} role="region" aria-roledescription="carrusel" aria-label="Planes de NebuExperiencias">
+      <div className="plans-glow" ref={(el) => { glowRefs.current[0] = el; }} aria-hidden="true" />
+      <div className="plans-glow" ref={(el) => { glowRefs.current[1] = el; }} aria-hidden="true" />
+      <div className="plans-stage" ref={stageRef}>
+        {plans.map((plan, index) => <article className={`plan ${plan.featured ? 'plan-featured' : ''}`} key={plan.name} ref={(el) => { cardRefs.current[index] = el; }} style={{ '--plan-glow': plan.color }} aria-label={`Plan ${plan.name}`} aria-hidden={current !== index} inert={current !== index}>
+          <div className="plan-head">
+            <span className="plan-icon"><Icon name={plan.icon} /></span>
+            <h3>{plan.name}</h3>
+            {plan.featured && <span className="badge">Más elegido</span>}
+          </div>
+          <div className="plan-body">
+            <p className="plan-for">{plan.for}</p>
+            <p className="price">{plan.price ? <><span>Desde</span>{plan.price} <small>COP</small></> : <>Cotización <small>personalizada</small></>}</p>
+            <p className="plan-includes">Qué incluye</p>
+            <ul className="plan-list">{plan.points.map(([icon, text]) => <li key={text}><span className="plan-bullet"><Icon name={icon} /></span>{text}</li>)}</ul>
+            <Wa className="btn plan-cta" message={plan.message}>{plan.action}</Wa>
+          </div>
+          <div className="plan-shade" aria-hidden="true" />
+        </article>)}
+      </div>
+      <button className="plans-nav plans-nav-prev" type="button" aria-label="Ver plan anterior" onClick={() => api.current.prev?.()}><Icon name="ChevronLeft" /></button>
+      <button className="plans-nav plans-nav-next" type="button" aria-label="Ver siguiente plan" onClick={() => api.current.next?.()}><Icon name="ChevronRight" /></button>
     </div>
-    {isMobile && <div className="plans-carousel-controls" aria-label="Controles de planes">
-      <button className="icon-btn" type="button" aria-label="Ver plan anterior" onClick={() => goTo(activeIndex - 1)}><Icon name="ChevronLeft" /></button>
-      <div className="plans-carousel-dots" role="group" aria-label="Elegir plan">{plans.map((plan, index) => <button key={plan.name} className={`plans-carousel-dot ${activeIndex === index ? 'is-active' : ''}`} type="button" aria-label={`Ver plan ${plan.name}`} aria-current={activeIndex === index ? 'true' : undefined} onClick={() => goTo(index)} />)}</div>
-      <button className="icon-btn" type="button" aria-label="Ver siguiente plan" onClick={() => goTo(activeIndex + 1)}><Icon name="ChevronRight" /></button>
-    </div>}
+    <div className="plans-tabs" role="group" aria-label="Elegir plan">{plans.map((plan, index) => <button key={plan.name} type="button" className={`plans-tab ${current === index ? 'is-active' : ''}`} style={{ '--plan-glow': plan.color }} aria-pressed={current === index} onClick={() => api.current.jump?.(index)}>{plan.name}</button>)}</div>
+    <p className="plans-note">Precios en pesos colombianos (COP), sin IVA. Dominio y hosting incluidos el primer año; después se renuevan a tarifa del proveedor.</p>
   </div></section>;
 }
 
