@@ -1,9 +1,10 @@
 import express from 'express';
-import rateLimit from 'express-rate-limit';
+import securityHeaders from './headers.js';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { answerChat } from './advisor.js';
+import { handleChat, handleTranscript } from './advisor.js';
+import { clientIp } from './security.js';
 
 const app = express();
 const port = Number(process.env.PORT || process.env.API_PORT || 8787);
@@ -14,25 +15,21 @@ const appRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const shouldServeFrontend = process.argv.includes('--web');
 
 app.disable('x-powered-by');
+app.use(securityHeaders);
 app.use(express.json({ limit: '12kb' }));
 
-const chatLimiter = rateLimit({
-    windowMs: 60_000,
-    limit: 12,
-    standardHeaders: 'draft-8',
-    legacyHeaders: false,
-    message: { error: 'rate_limit_exceeded' },
-});
+const adapt = (handler, extra) => async (request, response) => {
+    const result = await handler({ method: request.method, headers: request.headers, body: request.body, ip: clientIp(request.headers, request.ip) }, extra);
+    response.set({ 'Cache-Control': 'no-store', ...(result.headers || {}) });
+    response.status(result.status).json(result.body);
+};
 
 app.get('/api/health', (_request, response) => {
     response.set('Cache-Control', 'no-store');
     response.json({ configured: Boolean(apiKey) });
 });
-
-app.post('/api/chat', chatLimiter, async (request, response) => {
-    const { status, body } = await answerChat(request.body?.messages, { apiKey, model });
-    response.status(status).json(body);
-});
+app.all('/api/chat', adapt(handleChat, { apiKey, model }));
+app.all('/api/transcript', adapt(handleTranscript));
 
 if (shouldServeFrontend) {
     const distPath = path.join(appRoot, 'dist');

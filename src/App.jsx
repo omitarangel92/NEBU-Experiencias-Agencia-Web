@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+﻿import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import {
   ArrowUpRight, Bot, CalendarCheck, Check, ChevronLeft, ChevronRight, Clock, Clock3, Code, Database, Eye, Gauge, Globe,
@@ -453,7 +453,24 @@ function Courses({ reduced }) {
 function ChatWidget() {
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState('');
-  const [messages, setMessages] = useState([{ role: 'assistant', text: '¡Hola! Soy el asesor de NebuExperiencias. ¿Qué te gustaría mejorar de tu negocio?' }]);
+  const [messages, setMessages] = useState([{ role: 'assistant', text: '¡Hola! Bienvenido a NebuExperiencias, soy su asistente virtual con inteligencia artificial. ¿Con quién tengo el gusto de hablar? Cuéntame tu nombre para atenderte mejor.' }]);
+  const [customer, setCustomer] = useState({ name: '', contact: '', summary: '' });
+  const [handoff, setHandoff] = useState(false);
+  const conversationId = useRef(typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : String(Date.now()));
+  const notified = useRef(false);
+  const live = useRef({});
+  live.current = { messages, customer };
+
+  function sendTranscript(reason) {
+    const { messages: log, customer: person } = live.current;
+    if (notified.current || log.filter((item) => item.role === 'user').length < (reason === 'closed' ? 2 : 1)) return;
+    notified.current = true;
+    fetch('/api/transcript', {
+      method: 'POST', keepalive: true,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ reason, conversationId: conversationId.current, customer: person, messages: log.slice(-30) }),
+    }).catch(() => {});
+  }
   const [fallbackMessage, setFallbackMessage] = useState('Hola, necesito asesoría para mi negocio');
   const [sending, setSending] = useState(false);
   const [offline, setOffline] = useState(true);
@@ -482,6 +499,12 @@ function ChatWidget() {
 
   useEffect(() => { if (open) input.current?.focus(); }, [open]);
   useEffect(() => {
+    const onHide = () => { if (document.visibilityState === 'hidden') sendTranscript('closed'); };
+    document.addEventListener('visibilitychange', onHide);
+    return () => document.removeEventListener('visibilitychange', onHide);
+  }, []);
+  useEffect(() => { if (!open) sendTranscript('closed'); }, [open]);
+  useEffect(() => {
     const onKey = (event) => { if (event.key === 'Escape' && open) setOpen(false); };
     document.addEventListener('keydown', onKey);
     return () => document.removeEventListener('keydown', onKey);
@@ -501,16 +524,20 @@ function ChatWidget() {
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: conversation }),
+        body: JSON.stringify({ messages: conversation, customer, conversationId: conversationId.current, notified: notified.current, turns: messages.filter((item) => item.role === 'user').length + 1, website: '' }),
         signal: controller.signal,
       });
       if (!response.ok) throw new Error('El asesor no pudo responder.');
       const data = await response.json();
       if (typeof data.reply !== 'string' || !data.reply.trim()) throw new Error('Respuesta vacía.');
       setMessages((current) => [...current, { role: 'assistant', text: data.reply.trim() }]);
+      if (data.customer) setCustomer(data.customer);
+      if (data.handoff) { setHandoff(true); notified.current = true; }
       setStatus('Asesor IA conectado');
     } catch {
       setFallbackMessage(text);
+      live.current = { ...live.current, messages: [...live.current.messages, { role: 'user', text }] };
+      sendTranscript('ai_error');
       setOffline(true);
       setStatus('Usa WhatsApp por ahora');
     }
@@ -521,6 +548,7 @@ function ChatWidget() {
     <AnimatePresence>{open && <motion.section className="ai-chat-panel" id="ai-chat-panel" role="dialog" aria-labelledby="ai-chat-title" aria-modal="false" initial={{ opacity: 0, y: 10, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 8, scale: 0.985 }} transition={{ duration: 0.18, ease: EASE }}>
       <header className="ai-chat-header"><span className="ai-chat-avatar"><Icon name="Bot" /></span><div><h2 id="ai-chat-title">Asesor NebuExperiencias</h2><p><span className="ai-chat-live-dot" /><span id="ai-chat-status">{status}</span></p></div><button className="ai-chat-close" type="button" aria-label="Cerrar chat" onClick={() => setOpen(false)}><Icon name="X" /></button></header>
       <div className="ai-chat-messages" aria-live="polite" aria-relevant="additions">{messages.map((item, index) => <p className={`ai-chat-bubble ai-chat-bubble-${item.role}`} key={`${item.role}-${index}`}>{item.text}</p>)}{sending && <p className="ai-chat-bubble ai-chat-bubble-assistant">Un momento, estoy consultando...</p>}</div>
+      {handoff && !offline && <p className="ai-chat-fallback">Un asesor del equipo te escribirá pronto. Si prefieres, también puedes escribirnos por <a href={whatsapp} target="_blank" rel="noopener">WhatsApp</a>.</p>}
       {offline && <p className="ai-chat-fallback">{status === 'Conexión pendiente' ? 'El asesor IA se está configurando.' : status === 'Comprobando conexión...' ? 'Estamos verificando la conexión del asesor.' : 'No pudimos conectar con el asesor.'} Mientras tanto, podemos atenderte por <a href={whatsapp} target="_blank" rel="noopener">WhatsApp</a>.</p>}
       <form className="ai-chat-form" id="ai-chat-form" onSubmit={submit}><label className="visually-hidden" htmlFor="ai-chat-input">Escribe tu consulta</label><input ref={input} id="ai-chat-input" name="message" maxLength="1000" placeholder="Escribe tu consulta..." autoComplete="off" required value={message} onChange={(event) => setMessage(event.target.value)} /><button type="submit" aria-label="Enviar mensaje" disabled={sending}><Icon name="Send" /></button></form>
     </motion.section>}</AnimatePresence>

@@ -7,13 +7,7 @@
     <meta name="theme-color" content="#e4e9f2" />
     <title>NebuExperiencias | Sitios web y asistentes de IA para tu negocio</title>
     <link rel="icon" type="image/webp" href="/assets/img/favicon.webp">
-    <script>
-      try {
-        const theme = localStorage.getItem('theme') ||
-          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-        document.documentElement.setAttribute('data-theme', theme);
-      } catch {}
-    </script>
+    <script src="/theme-init.js"></script>
     
     <link rel="preload" as="image" href="/assets/img/hero-1-800.webp" imagesrcset="/assets/img/hero-1-800.webp 800w, /assets/img/hero-1-1600.webp 1600w" imagesizes="100vw" fetchpriority="high" />
   </head>
