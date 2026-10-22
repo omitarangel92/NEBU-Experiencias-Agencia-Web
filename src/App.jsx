@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
-import gsap from 'gsap';
 import {
   ArrowUpRight, Bot, CalendarCheck, Check, ChevronLeft, ChevronRight, Clock, Clock3, Code, Database, Eye, Gauge, Globe,
   HeartHandshake, Headset, LayoutTemplate, Layers, Mail, Menu, MessageCircle,
@@ -16,9 +15,9 @@ const EASE = [0.23, 1, 0.32, 1];
 const icons = { ArrowUpRight, Bot, CalendarCheck, Check, ChevronLeft, ChevronRight, Clock, Clock3, Code, Database, Eye, Gauge, Globe, HeartHandshake, Headset, LayoutTemplate, Layers, Mail, Menu, MessageCircle, MessagesSquare, Moon, MoreHorizontal, Palette, Pause, Play, Plug, RefreshCw, Rocket, Search, Send, Server, ShieldCheck, ShoppingCart, Signal, Smartphone, Sparkles, Sun, TrendingUp, WandSparkles, Wrench, X, Zap };
 const nav = [['home', 'Home'], ['quienes-somos', 'Quiénes somos'], ['servicios', 'Servicios'], ['planes', 'Planes'], ['cursos', 'Cursos']];
 const slides = [
-  { image: 'https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=2400&q=90', video: 'videos/hero-1.mp4', kicker: 'Automatización inteligente', title: 'Tecnología que atiende a tus clientes mientras tú descansas', copy: 'Diseñamos sitios web rápidos y asistentes de inteligencia artificial para WhatsApp y chat web que responden, orientan y venden las 24 horas.', action: 'Hablar por WhatsApp', message: 'Hola, quiero conocer los servicios de NebuExperiencias', points: [['Zap', 'Sitios que cargan en menos de 2 segundos'], ['Clock', 'Asistentes activos 24/7']] },
-  { image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=2400&q=90', video: 'videos/hero-2.mp4', kicker: 'Diseño y desarrollo', title: 'Sitios web modernos que convierten visitas en clientes', copy: 'Desarrollamos páginas veloces, atractivas y adaptadas a cualquier pantalla, para que tu negocio se vea profesional y venda más.', action: 'Cotizar mi sitio web', message: 'Hola, quiero cotizar un sitio web', points: [['Smartphone', 'Diseño adaptable a celular, tablet y computador'], ['Search', 'Optimizado para aparecer en Google']] },
-  { image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=2400&q=90', video: 'videos/hero-3.mp4', kicker: 'Optimización y crecimiento', title: 'Tu sitio actual puede cargar más rápido y vender más', copy: 'Revisamos y rediseñamos tu página para que sea más clara, más veloz y mucho más fácil de usar desde el celular.', action: 'Pedir una revisión', message: 'Hola, quiero una revisión de mi sitio web actual', points: [['Gauge', 'Auditoría de velocidad y usabilidad'], ['RefreshCw', 'Rediseño sin perder tu posicionamiento']] },
+  { image: 'https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=1600&q=65', video: 'videos/hero-1.mp4', kicker: 'Automatización inteligente', title: 'Tecnología que atiende a tus clientes mientras tú descansas', copy: 'Diseñamos sitios web rápidos y asistentes de inteligencia artificial para WhatsApp y chat web que responden, orientan y venden las 24 horas.', action: 'Hablar por WhatsApp', message: 'Hola, quiero conocer los servicios de NebuExperiencias', points: [['Zap', 'Sitios que cargan en menos de 2 segundos'], ['Clock', 'Asistentes activos 24/7']] },
+  { image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=65', video: 'videos/hero-2.mp4', kicker: 'Diseño y desarrollo', title: 'Sitios web modernos que convierten visitas en clientes', copy: 'Desarrollamos páginas veloces, atractivas y adaptadas a cualquier pantalla, para que tu negocio se vea profesional y venda más.', action: 'Cotizar mi sitio web', message: 'Hola, quiero cotizar un sitio web', points: [['Smartphone', 'Diseño adaptable a celular, tablet y computador'], ['Search', 'Optimizado para aparecer en Google']] },
+  { image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=65', video: 'videos/hero-3.mp4', kicker: 'Optimización y crecimiento', title: 'Tu sitio actual puede cargar más rápido y vender más', copy: 'Revisamos y rediseñamos tu página para que sea más clara, más veloz y mucho más fácil de usar desde el celular.', action: 'Pedir una revisión', message: 'Hola, quiero una revisión de mi sitio web actual', points: [['Gauge', 'Auditoría de velocidad y usabilidad'], ['RefreshCw', 'Rediseño sin perder tu posicionamiento']] },
 ];
 const services = [
   { icon: 'LayoutTemplate', art: 'service-art-web', title: 'Desarrollo web dinámico', copy: 'Sitios modernos, veloces y adaptados a celular, tablet y computador, listos para convertir visitas en clientes.', points: ['Diseño a la medida de tu marca', 'Optimizado para Google', 'Formularios, reservas y pagos'] },
@@ -85,7 +84,7 @@ function Header({ theme, toggleTheme }) {
   }, []);
   return (
     <header className="site-header"><nav className="container nav" aria-label="Principal">
-      <a className="brand" href="#home" aria-label="NebuExperiencias, ir al inicio"><img className={`logo ${theme === 'dark' ? 'logo-for-dark' : 'logo-for-light'}`} src={`assets/img/logo-${theme === 'dark' ? 'blanco' : 'negro'}.png`} alt="NebuExperiencias" width="700" height="301" /></a>
+      <a className="brand" href="#home" aria-label="NebuExperiencias, ir al inicio"><img className={`logo ${theme === 'dark' ? 'logo-for-dark' : 'logo-for-light'}`} src={`assets/img/logo-${theme === 'dark' ? 'blanco' : 'negro'}.png`} alt="NebuExperiencias" width="420" height="240" /></a>
       <ul className={`nav-links ${menuOpen ? 'open' : ''}`} id="nav-links">{nav.map(([id, label]) => <li key={id}><a href={`#${id}`} className={`nav-link ${active === id ? 'active' : ''}`} onClick={() => setMenuOpen(false)}>{label}</a></li>)}</ul>
       <div className="nav-actions">
         <button className="icon-btn" id="theme-toggle" type="button" aria-label={theme === 'dark' ? 'Cambiar a modo luz' : 'Cambiar a modo nocturno'} aria-pressed={theme === 'dark'} onClick={toggleTheme}><Icon name={theme === 'dark' ? 'Sun' : 'Moon'} /></button>
@@ -117,7 +116,7 @@ function Hero({ reduced }) {
     <section className="hero" id="home" aria-roledescription="carrusel" aria-label="Servicios destacados" onMouseEnter={() => setHoverPaused(true)} onMouseLeave={() => setHoverPaused(false)} onFocusCapture={pauseForFocus} onBlurCapture={resumeAfterFocus}>
       <div className="hero-slides"><AnimatePresence initial={false} mode="wait">
         <motion.div className="hero-slide is-active" key={current} role="group" aria-roledescription="diapositiva" aria-label={`${current + 1} de ${slides.length}`}>
-          <motion.img className="hero-bg" src={slide.image} alt="" aria-hidden="true" fetchPriority={current === 0 ? 'high' : 'auto'} initial={false} animate={reduced ? {} : { scale: [1.025, 1.075], x: ['0%', '-1%'], y: ['0%', '1%'] }} transition={{ duration: 18, repeat: Infinity, repeatType: 'mirror', ease: 'easeInOut' }} />
+          <motion.img className="hero-bg" src={slide.image} srcSet={` 800w,  1600w`} sizes="100vw" width="1600" height="1000" alt="" aria-hidden="true" fetchPriority={current === 0 ? 'high' : 'auto'} initial={false} animate={reduced ? {} : { scale: [1.025, 1.075], x: ['0%', '-1%'], y: ['0%', '1%'] }} transition={{ duration: 18, repeat: Infinity, repeatType: 'mirror', ease: 'easeInOut' }} />
           <HeroVideo slide={slide} reduced={reduced} />
           <div className="hero-shade" aria-hidden="true" />
           <div className="container hero-layout">
@@ -138,8 +137,21 @@ function Hero({ reduced }) {
 
 function HeroVideo({ slide, reduced }) {
   const [failed, setFailed] = useState(false);
-  if (failed || reduced) return null;
-  return <video className="hero-video" src={`${import.meta.env.BASE_URL}${slide.video}`} poster={slide.image} autoPlay muted loop playsInline preload="auto" aria-hidden="true" tabIndex={-1} onError={() => setFailed(true)} />;
+  const [available, setAvailable] = useState(false);
+  const src = `${import.meta.env.BASE_URL}${slide.video}`;
+  useEffect(() => {
+    if (reduced) return undefined;
+    const controller = new AbortController();
+    setAvailable(false);
+    setFailed(false);
+    // Evita un error 404 en consola mientras el video aún no exista
+    fetch(src, { method: 'HEAD', signal: controller.signal })
+      .then((res) => setAvailable(res.ok && (res.headers.get('content-type') || '').startsWith('video')))
+      .catch(() => {});
+    return () => controller.abort();
+  }, [src, reduced]);
+  if (failed || reduced || !available) return null;
+  return <video className="hero-video" src={`${import.meta.env.BASE_URL}${slide.video}`} poster={slide.image} autoPlay muted loop playsInline preload="metadata" aria-hidden="true" tabIndex={-1} onError={() => setFailed(true)} />;
 }
 
 function VideoButton() {
@@ -206,6 +218,11 @@ function Plans({ reduced }) {
   const n = plans.length;
 
   useEffect(() => {
+    let cleanup;
+    let dead = false;
+    import('gsap').then(({ default: gsap }) => {
+      if (dead) return;
+      cleanup = (() => {
     const root = rootRef.current;
     const stage = stageRef.current;
     const cards = cardRefs.current;
@@ -410,6 +427,9 @@ function Plans({ reduced }) {
       root.removeEventListener('focusout', onLeave);
       window.removeEventListener('resize', onResize);
     };
+      })();
+    });
+    return () => { dead = true; cleanup?.(); };
   }, []);
 
   return <section className="section section-plans motion-surface" id="planes"><Flow reduced={reduced} /><div className="container">
@@ -524,7 +544,7 @@ function ChatWidget() {
       {offline && <p className="ai-chat-fallback">{status === 'Conexión pendiente' ? 'El asesor IA se está configurando.' : status === 'Comprobando conexión...' ? 'Estamos verificando la conexión del asesor.' : 'No pudimos conectar con el asesor.'} Mientras tanto, podemos atenderte por <a href={whatsapp} target="_blank" rel="noopener">WhatsApp</a>.</p>}
       <form className="ai-chat-form" id="ai-chat-form" onSubmit={submit}><label className="visually-hidden" htmlFor="ai-chat-input">Escribe tu consulta</label><input ref={input} id="ai-chat-input" name="message" maxLength="1000" placeholder="Escribe tu consulta..." autoComplete="off" required value={message} onChange={(event) => setMessage(event.target.value)} /><button type="submit" aria-label="Enviar mensaje" disabled={sending}><Icon name="Send" /></button></form>
     </motion.section>}</AnimatePresence>
-    <button className="ai-chat-trigger" id="ai-chat-trigger" type="button" aria-expanded={open} aria-controls="ai-chat-panel" onClick={() => setOpen((value) => !value)}><Icon name={open ? 'X' : 'MessageCircle'} /><span className="ai-chat-trigger-label">Chat IA en línea</span><span className="ai-chat-trigger-dot" aria-hidden="true" /></button>
+    <button className="ai-chat-trigger" id="ai-chat-trigger" type="button" aria-label={open ? 'Cerrar chat con el asesor IA' : 'Abrir chat con el asesor IA'} aria-expanded={open} aria-controls="ai-chat-panel" onClick={() => setOpen((value) => !value)}><Icon name={open ? 'X' : 'MessageCircle'} /><span className="ai-chat-trigger-label">Chat IA en línea</span><span className="ai-chat-trigger-dot" aria-hidden="true" /></button>
   </aside>;
 }
 
@@ -606,8 +626,8 @@ function Footer() {
   return <footer className="site-footer">
     <div className="container footer-grid">
       <div className="footer-brand">
-        <img className="logo logo-for-light" src="assets/img/logo-negro.png" alt="NebuExperiencias" width="700" height="301" />
-        <img className="logo logo-for-dark" src="assets/img/logo-blanco.png" alt="" width="700" height="301" aria-hidden="true" />
+        <img className="logo logo-for-light" src="assets/img/logo-negro.png" alt="NebuExperiencias" width="420" height="240" />
+        <img className="logo logo-for-dark" src="assets/img/logo-blanco.png" alt="" width="420" height="240" aria-hidden="true" />
         <p>Sitios web y asistentes de IA para negocios que quieren atender mejor.</p>
       </div>
       <nav aria-label="Enlaces de interés">
