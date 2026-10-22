@@ -27,7 +27,7 @@ export async function sendTranscript({ reason, conversationId, customer, message
 <p><strong>Nombre:</strong> ${escapeHtml(name)}<br>
 <strong>Contacto:</strong> ${escapeHtml(customer?.contact || 'No indicado')}<br>
 <strong>Resumen:</strong> ${escapeHtml(customer?.summary || 'Sin resumen')}<br>
-<strong>ID:</strong> ${escapeHtml(conversationId)} · IP ${escapeHtml(ip)}</p>
+<strong>ID:</strong> ${escapeHtml(conversationId)}${ip ? ` · IP ${escapeHtml(ip)}` : ''}</p>
 ${waLink ? `<p><a href="${escapeHtml(waLink)}">Responder por WhatsApp</a></p>` : ''}
 <hr>${rows}</div>`;
 

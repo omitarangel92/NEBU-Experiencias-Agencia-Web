@@ -1,6 +1,6 @@
 ﻿import companyProfile from './knowledge/company.json' with { type: 'json' };
 import { cleanText, guard, isInjection, isJunk, LIMITS, validateMessages } from './security.js';
-import { sendTranscript } from './notify.js';
+import { emailConfigured, sendTranscript } from './notify.js';
 
 const WA_HINT = 'También puedes escribirnos directamente por WhatsApp.';
 
@@ -171,4 +171,34 @@ export async function handleTranscript(request) {
     };
     const sent = await sendTranscript({ reason, conversationId: cleanText(request.body.conversationId, 40), customer, messages, ip: request.ip });
     return { status: 200, body: { sent } };
+}
+
+export async function handleLead(request) {
+    const blocked = guard(request, { name: 'lead', perMinute: 3, perHour: 10 });
+    if (blocked) return blocked;
+
+    const name = cleanText(request.body.name, 60);
+    const email = cleanText(request.body.email, 120).toLowerCase();
+    const phone = cleanText(request.body.phone, 24);
+    const phoneDigits = phone.replace(/\D/g, '');
+    const interest = cleanText(request.body.interest, 100);
+    const validInterests = ['Desarrollo web', 'Asistente de IA', 'Optimización y rediseño', 'Cursos', 'Otro proyecto'];
+    if (name.length < 2 || !validInterests.includes(interest) || request.body.consent !== true) return { status: 400, body: { error: 'invalid_lead' } };
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return { status: 400, body: { error: 'invalid_email' } };
+    if (phone && (phoneDigits.length < 10 || phoneDigits.length > 15)) return { status: 400, body: { error: 'invalid_phone' } };
+    if (!email && !phone) return { status: 400, body: { error: 'contact_required' } };
+    if (!emailConfigured()) {
+        console.error('Lead omitido: faltan RESEND_API_KEY o NOTIFY_EMAIL');
+        return { status: 503, body: { error: 'lead_not_configured' } };
+    }
+
+    const sent = await sendTranscript({
+        reason: 'lead',
+        conversationId: `lead-${Date.now()}`,
+        customer: { name, contact: phone, summary: `Correo: ${email || 'No indicado'}. Interés: ${interest}` },
+        messages: [{ role: 'user', text: `Solicitud de información sobre: ${interest}` }],
+    });
+    return sent
+        ? { status: 200, body: { sent: true } }
+        : { status: 502, body: { error: 'lead_delivery_failed' } };
 }

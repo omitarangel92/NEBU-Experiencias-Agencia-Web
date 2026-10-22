@@ -3,7 +3,7 @@ import securityHeaders from './headers.js';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { handleChat, handleTranscript } from './advisor.js';
+import { handleChat, handleLead, handleTranscript } from './advisor.js';
 import { clientIp } from './security.js';
 
 const app = express();
@@ -29,6 +29,7 @@ app.get('/api/health', (_request, response) => {
     response.json({ configured: Boolean(apiKey) });
 });
 app.all('/api/chat', adapt(handleChat, { apiKey, model }));
+app.all('/api/lead', adapt(handleLead));
 app.all('/api/transcript', adapt(handleTranscript));
 
 if (shouldServeFrontend) {

@@ -1,0 +1,17 @@
+{
+  "name": "NebuExperiencias | Agencia web",
+  "short_name": "Nebu",
+  "lang": "es-CO",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#e4e9f2",
+  "theme_color": "#e4e9f2",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

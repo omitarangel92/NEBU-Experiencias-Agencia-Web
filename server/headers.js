@@ -1,13 +1,13 @@
 // Cabeceras de seguridad para el servidor Express (en Vercel se definen en vercel.json).
 export const CSP = [
     "default-src 'self'",
-    "script-src 'self'",
+    "script-src 'self' https://www.googletagmanager.com",
     "style-src 'self' 'unsafe-inline'",
     "img-src 'self' data: https:",
     "font-src 'self' data:",
     "media-src 'self' https:",
     "frame-src https://www.youtube.com https://www.youtube-nocookie.com https://player.vimeo.com",
-    "connect-src 'self'",
+    "connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://analytics.google.com",
     "object-src 'none'",
     "base-uri 'self'",
     "form-action 'self'",
