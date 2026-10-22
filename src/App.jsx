@@ -13,7 +13,7 @@ const WA_NUMBER = '573106598981';
 const HOTMART = ['https://hotmart.com', 'https://hotmart.com', 'https://hotmart.com'];
 const EASE = [0.23, 1, 0.32, 1];
 const icons = { ArrowUpRight, Bot, CalendarCheck, Check, ChevronLeft, ChevronRight, Clock, Clock3, Code, Database, Eye, Gauge, Globe, HeartHandshake, Headset, LayoutTemplate, Layers, Mail, Menu, MessageCircle, MessagesSquare, Moon, MoreHorizontal, Palette, Pause, Play, Plug, RefreshCw, Rocket, Search, Send, Server, ShieldCheck, ShoppingCart, Signal, Smartphone, Sparkles, Sun, TrendingUp, WandSparkles, Wrench, X, Zap };
-const nav = [['home', 'Home'], ['quienes-somos', 'Quiénes somos'], ['servicios', 'Servicios'], ['planes', 'Planes'], ['cursos', 'Cursos']];
+const nav = [['home', 'Inicio'], ['quienes-somos', 'Quiénes somos'], ['servicios', 'Servicios'], ['planes', 'Planes'], ['cursos', 'Cursos']];
 const slides = [
   { image: '/assets/img/hero-1-1600.webp', small: '/assets/img/hero-1-800.webp', kicker: 'Automatización inteligente', title: 'Tecnología que atiende a tus clientes mientras tú descansas', copy: 'Diseñamos sitios web rápidos y asistentes de inteligencia artificial para WhatsApp y chat web que responden, orientan y venden las 24 horas.', action: 'Hablar por WhatsApp', message: 'Hola, quiero conocer los servicios de NebuExperiencias', points: [['Zap', 'Sitios que cargan en menos de 2 segundos'], ['Clock', 'Asistentes activos 24/7']] },
   { image: '/assets/img/hero-2-1600.webp', small: '/assets/img/hero-2-800.webp', kicker: 'Diseño y desarrollo', title: 'Sitios web modernos que convierten visitas en clientes', copy: 'Desarrollamos páginas veloces, atractivas y adaptadas a cualquier pantalla, para que tu negocio se vea profesional y venda más.', action: 'Cotizar mi sitio web', message: 'Hola, quiero cotizar un sitio web', points: [['Smartphone', 'Diseño adaptable a celular, tablet y computador'], ['Search', 'Optimizado para aparecer en Google']] },
@@ -87,6 +87,7 @@ function Header({ theme, toggleTheme }) {
       <a className="brand" href="#home" aria-label="NebuExperiencias, ir al inicio"><img className={`logo ${theme === 'dark' ? 'logo-for-dark' : 'logo-for-light'}`} src={`assets/img/logo-${theme === 'dark' ? 'blanco' : 'negro'}.webp`} alt="NebuExperiencias" width="420" height="240" /></a>
       <ul className={`nav-links ${menuOpen ? 'open' : ''}`} id="nav-links">{nav.map(([id, label]) => <li key={id}><a href={`#${id}`} className={`nav-link ${active === id ? 'active' : ''}`} onClick={() => setMenuOpen(false)}>{label}</a></li>)}</ul>
       <div className="nav-actions">
+        <Wa className="btn btn-primary nav-cta" message="Hola, quiero cotizar un proyecto con NebuExperiencias"><Icon name="MessageCircle" />Cotizar</Wa>
         <button className="icon-btn" id="theme-toggle" type="button" aria-label={theme === 'dark' ? 'Cambiar a modo luz' : 'Cambiar a modo nocturno'} aria-pressed={theme === 'dark'} onClick={toggleTheme}><Icon name={theme === 'dark' ? 'Sun' : 'Moon'} /></button>
         <button className="icon-btn menu-btn" id="menu-btn" type="button" aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'} aria-expanded={menuOpen} aria-controls="nav-links" onClick={() => setMenuOpen((value) => !value)}><Icon name={menuOpen ? 'X' : 'Menu'} /></button>
       </div>
@@ -144,16 +145,17 @@ function VideoButton() {
       : <iframe src={`${source}${source.includes('?') ? '&' : '?'}autoplay=1`} allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowFullScreen title="Video de presentación de NebuExperiencias" />;
   }
   return <button className="video-play" type="button" aria-label="Reproducir video de presentación" onClick={() => source && setPlaying(true)}>
-    <img className="video-preview" src="/assets/img/video-preview-900.webp" alt="" loading="lazy" /><span className="video-wash" aria-hidden="true" /><span className="play-circle"><Icon name="Play" /></span><span className="video-caption">Conoce NebuExperiencias en 60 segundos</span><small className="video-hint">Aquí irá tu video de presentación</small>
+    <img className="video-preview" src="/assets/img/video-preview-900.webp" alt="" loading="lazy" /><span className="video-wash" aria-hidden="true" /><span className="play-circle"><Icon name="Play" /></span><span className="video-caption">Conoce NebuExperiencias en 60 segundos</span>
   </button>;
 }
 
 function About({ reduced }) {
   const values = [['HeartHandshake', 'Cercanía', 'Te acompañamos antes, durante y después del lanzamiento.'], ['Gauge', 'Rendimiento', 'Todo lo que hacemos es rápido, liviano y fácil de usar.'], ['Eye', 'Claridad', 'Hablamos sin tecnicismos y con precios transparentes.']];
-  return <section className="section section-about motion-surface" id="quienes-somos"><Flow reduced={reduced} /><div className="container about-grid">
+  const hasVideo = Boolean(import.meta.env.VITE_PRESENTATION_VIDEO);
+  return <section className="section section-about motion-surface" id="quienes-somos"><Flow reduced={reduced} /><div className={`container about-grid ${hasVideo ? '' : 'no-video'}`}>
     <Reveal as={motion.div}><h2>Hacemos que la tecnología se sienta simple</h2><p className="lead">NebuExperiencias es una agencia que ayuda a negocios a atender mejor, vender más y ahorrar tiempo con sitios web modernos y automatización con IA.</p><div className="vision inset"><h3>Nuestra visión</h3><p>Que cualquier negocio, sin importar su tamaño, tenga una presencia digital profesional y un asistente que nunca deje un cliente sin respuesta.</p></div>
       <ul className="values">{values.map(([icon, title, copy]) => <li key={title}><span className="icon-well"><Icon name={icon} /></span><div><h3>{title}</h3><p>{copy}</p></div></li>)}</ul>
-    </Reveal><Reveal as={motion.div} delay={0.12}><div className="video-slot raised" id="video-slot" data-video=""><VideoButton /></div></Reveal>
+    </Reveal>{hasVideo && <Reveal as={motion.div} delay={0.12}><div className="video-slot raised" id="video-slot" data-video=""><VideoButton /></div></Reveal>}
   </div></section>;
 }
 

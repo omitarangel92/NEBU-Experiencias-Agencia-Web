@@ -2475,3 +2475,24 @@ main {
     animation: none;
   }
 }
+/* ---------- Mejoras de conversion y contraste ---------- */
+.about-grid.no-video {
+  grid-template-columns: minmax(0, 820px);
+}
+
+.hero-cta .btn:not(.btn-primary) {
+  background: rgba(10, 20, 45, .72);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, .45);
+}
+
+.nav-cta {
+  min-height: 44px;
+  padding: 0 20px;
+}
+
+@media (max-width: 560px) {
+  .nav-cta {
+    padding: 0 14px;
+  }
+}
