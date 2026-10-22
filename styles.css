@@ -2778,27 +2778,32 @@ body {
   height: 100%;
   min-height: 570px;
   padding: 28px 24px 24px;
-  overflow: visible;
-  border: 1px solid color-mix(in srgb, var(--muted) 24%, transparent);
-  border-radius: var(--r-lg);
-  background: var(--bg);
-  box-shadow: var(--raised-sm);
-  backdrop-filter: none;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--plan-glow) 45%, rgba(255, 255, 255, .5));
+  border-radius: 22px;
+  background: linear-gradient(145deg, rgba(255, 255, 255, .74), rgba(255, 255, 255, .34) 62%), color-mix(in srgb, var(--bg) 60%, white);
+  box-shadow: 0 24px 60px color-mix(in srgb, var(--plan-glow) 22%, rgba(30, 40, 80, .12)), inset 0 1px rgba(255, 255, 255, .8);
+  backdrop-filter: blur(18px) saturate(1.2);
   user-select: auto;
   transform: none !important;
   opacity: 1 !important;
 }
 
+[data-theme="dark"] .plan {
+  background: linear-gradient(145deg, rgba(255, 255, 255, .12), rgba(255, 255, 255, .04) 62%), color-mix(in srgb, var(--bg) 70%, transparent);
+  box-shadow: 0 24px 60px color-mix(in srgb, var(--plan-glow) 18%, rgba(0, 0, 0, .35)), inset 0 1px rgba(255, 255, 255, .18);
+}
+
 .plan-featured {
   z-index: 1;
-  border: 2px solid var(--accent);
-  box-shadow: 0 18px 42px color-mix(in srgb, var(--accent) 18%, transparent);
+  border: 1px solid var(--plan-glow);
+  box-shadow: 0 24px 60px color-mix(in srgb, var(--plan-glow) 38%, transparent), inset 0 1px rgba(255, 255, 255, .8);
   transform: translateY(-8px) !important;
 }
 
 .plan::before {
-  height: 4px;
-  background: var(--accent);
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--plan-glow), transparent);
 }
 
 .plan-head {
@@ -2806,9 +2811,9 @@ body {
 }
 
 .plan-icon {
-  border-color: color-mix(in srgb, var(--accent) 32%, transparent);
-  background: color-mix(in srgb, var(--accent) 12%, var(--bg));
-  color: var(--accent);
+  border-color: color-mix(in srgb, var(--plan-glow) 45%, transparent);
+  background: color-mix(in srgb, var(--plan-glow) 16%, transparent);
+  color: color-mix(in srgb, var(--plan-glow) 62%, var(--text));
 }
 
 .plan-includes {
@@ -2830,35 +2835,36 @@ body {
 }
 
 .plan-bullet {
-  background: color-mix(in srgb, var(--accent) 12%, var(--bg));
-  color: var(--accent);
+  background: color-mix(in srgb, var(--plan-glow) 20%, transparent);
+  color: color-mix(in srgb, var(--plan-glow) 62%, var(--text));
 }
 
 .plan .plan-cta {
   margin-top: auto;
-  border: 1px solid var(--accent);
-  background: var(--bg);
-  color: var(--accent);
+  border: 1px solid color-mix(in srgb, var(--plan-glow) 70%, transparent);
+  background: color-mix(in srgb, var(--plan-glow) 18%, transparent);
+  color: var(--text);
 }
 
 .plan .plan-cta.btn-primary {
-  background: var(--accent);
-  color: var(--accent-ink);
+  border-color: var(--plan-glow);
+  background: var(--plan-glow);
+  color: #10131c;
 }
 
 .plan .plan-cta:hover {
-  background: color-mix(in srgb, var(--accent) 12%, var(--bg));
-  box-shadow: none;
+  background: color-mix(in srgb, var(--plan-glow) 34%, transparent);
+  box-shadow: 0 0 22px color-mix(in srgb, var(--plan-glow) 34%, transparent);
 }
 
 .plan .plan-cta.btn-primary:hover {
-  background: color-mix(in srgb, var(--accent) 88%, #000);
-  color: var(--accent-ink);
+  background: color-mix(in srgb, var(--plan-glow) 88%, #fff);
+  color: #10131c;
 }
 
 .badge {
-  background: var(--accent);
-  color: var(--accent-ink);
+  background: var(--plan-glow);
+  color: #10131c;
   font-size: .8125rem;
 }
 
@@ -2866,22 +2872,8 @@ body {
   font-size: .875rem;
 }
 
-[data-theme="dark"] .plan {
-  background: #202636;
-  border-color: #4b566d;
-}
-
-[data-theme="dark"] .plan-featured {
-  border-color: var(--accent);
-}
-
-[data-theme="dark"] .plan h3,
-[data-theme="dark"] .plan .plan-cta {
+[data-theme="dark"] .plan h3 {
   color: var(--text);
-}
-
-[data-theme="dark"] .plan .plan-cta.btn-primary {
-  color: var(--accent-ink);
 }
 
 [data-theme="dark"] .plan-includes,

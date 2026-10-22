@@ -27,9 +27,9 @@ const services = [
   { icon: 'WandSparkles', art: 'service-art-redesign', title: 'Optimización y rediseño', copy: 'Renovamos tu sitio actual para que sea más rápido, más claro y mucho más fácil de usar desde el celular.', points: ['Auditoría de velocidad y usabilidad', 'Nuevo diseño sin perder tu posicionamiento', 'Mejoras de contenido y llamados a la acción'] },
 ];
 const plans = [
-  { name: 'Inicio', icon: 'Rocket', color: '#4263eb', for: 'Una página para salir a internet hoy.', price: '$690.000', action: 'Elegir Inicio', message: 'Hola, me interesa el plan Inicio', points: [['LayoutTemplate', 'Página única con diseño de tu marca'], ['Smartphone', 'Adaptable a celular, tableta y computador'], ['Globe', 'Dominio .com incluido el primer año'], ['Server', 'Hosting veloz incluido el primer año'], ['ShieldCheck', 'Certificado SSL'], ['MessageCircle', 'Botón directo a WhatsApp'], ['Headset', '15 días de soporte tras la publicación']] },
-  { name: 'Web + Asistente IA', icon: 'Bot', color: '#087f8c', for: 'Un sitio web y atención automatizada en un mismo proyecto.', price: null, action: 'Cotizar Web + IA', message: 'Hola, me interesa el plan Web + Asistente IA', featured: true, points: [['LayoutTemplate', 'Sitio web adaptado a tu marca'], ['Bot', 'Asistente para WhatsApp y chat web'], ['MessagesSquare', 'Respuestas a preguntas frecuentes'], ['Clock', 'Configuración para atención las 24 horas'], ['HeartHandshake', 'Derivación a una persona cuando hace falta'], ['ShieldCheck', 'Configuración y pruebas antes de publicar'], ['Headset', 'Acompañamiento según el alcance acordado']] }, // TODO: confirmar precio y alcance antes de publicar.
-  { name: 'A la medida', icon: 'Sparkles', color: '#9a4d00', for: 'Para proyectos con necesidades propias.', price: null, action: 'Cotizar por WhatsApp', message: 'Hola, quiero una cotización a la medida', points: [['ShoppingCart', 'Tiendas en línea y plataformas web'], ['Plug', 'Integraciones con tus sistemas'], ['Bot', 'Automatizaciones e IA personalizadas'], ['Wrench', 'Rediseño de sitios existentes'], ['Database', 'Infraestructura según el proyecto'], ['Rocket', 'Capacitación para tu equipo'], ['Headset', 'Acompañamiento según propuesta']] },
+  { name: 'Inicio', icon: 'Rocket', color: '#6aa9ff', for: 'Una página para salir a internet hoy.', price: '$690.000', action: 'Elegir Inicio', message: 'Hola, me interesa el plan Inicio', points: [['LayoutTemplate', 'Página única con diseño de tu marca'], ['Smartphone', 'Adaptable a celular, tableta y computador'], ['Globe', 'Dominio .com incluido el primer año'], ['Server', 'Hosting veloz incluido el primer año'], ['ShieldCheck', 'Certificado SSL'], ['MessageCircle', 'Botón directo a WhatsApp'], ['Headset', '15 días de soporte tras la publicación']] },
+  { name: 'Web + Asistente IA', icon: 'Bot', color: '#be8fff', for: 'Un sitio web y atención automatizada en un mismo proyecto.', price: null, action: 'Cotizar Web + IA', message: 'Hola, me interesa el plan Web + Asistente IA', featured: true, points: [['LayoutTemplate', 'Sitio web adaptado a tu marca'], ['Bot', 'Asistente para WhatsApp y chat web'], ['MessagesSquare', 'Respuestas a preguntas frecuentes'], ['Clock', 'Configuración para atención las 24 horas'], ['HeartHandshake', 'Derivación a una persona cuando hace falta'], ['ShieldCheck', 'Configuración y pruebas antes de publicar'], ['Headset', 'Acompañamiento según el alcance acordado']] }, // TODO: confirmar precio y alcance antes de publicar.
+  { name: 'A la medida', icon: 'Sparkles', color: '#ffb85c', for: 'Para proyectos con necesidades propias.', price: null, action: 'Cotizar por WhatsApp', message: 'Hola, quiero una cotización a la medida', points: [['ShoppingCart', 'Tiendas en línea y plataformas web'], ['Plug', 'Integraciones con tus sistemas'], ['Bot', 'Automatizaciones e IA personalizadas'], ['Wrench', 'Rediseño de sitios existentes'], ['Database', 'Infraestructura según el proyecto'], ['Rocket', 'Capacitación para tu equipo'], ['Headset', 'Acompañamiento según propuesta']] },
 ];
 const courses = [
   { art: 'course-art-web', kicker: 'Diseño web', title: 'Tu primera web, paso a paso', copy: 'Publica un sitio profesional sin saber programar.', level: 'Nivel inicial', duration: '4 horas' },
@@ -150,10 +150,10 @@ function Flow({ reduced }) {
   return <motion.div className="section-lightstream" aria-hidden="true" animate={{ x: ['-7%', '7%'], y: ['-2%', '2%'], rotate: -7 }} transition={{ duration: 24, repeat: Infinity, repeatType: 'mirror', ease: 'easeInOut' }} />;
 }
 
-function Reveal({ as: Component = motion.div, children, className, delay = 0, move = true }) {
+function Reveal({ as: Component = motion.div, children, className, style, delay = 0, move = true }) {
   const reduced = useReducedMotion();
   const visibleState = { opacity: 1, ...(move ? { y: 0 } : {}) };
-  return <Component className={className} initial={false} whileInView={reduced ? undefined : visibleState} viewport={{ once: true, amount: 0.16 }} transition={{ duration: 0.58, delay, ease: EASE }}>{children}</Component>;
+  return <Component className={className} style={style} initial={false} whileInView={reduced ? undefined : visibleState} viewport={{ once: true, amount: 0.16 }} transition={{ duration: 0.58, delay, ease: EASE }}>{children}</Component>;
 }
 
 function useMobileLayout() {
@@ -295,7 +295,7 @@ function Plans() {
   return <section className="section section-plans" id="planes"><div className="container">
     <Reveal className="section-head"><h2>Planes</h2><p className="lead">Compara las opciones y elige el punto de partida para tu negocio.</p></Reveal>
     <div className="plans-grid">
-      {plans.map((plan) => <Reveal as={motion.article} className={`plan ${plan.featured ? 'plan-featured' : ''}`} key={plan.name} move={false}>
+      {plans.map((plan) => <Reveal as={motion.article} className={`plan ${plan.featured ? 'plan-featured' : ''}`} key={plan.name} move={false} style={{ '--plan-glow': plan.color }}>
         <div className="plan-head"><span className="plan-icon"><Icon name={plan.icon} /></span><h3>{plan.name}</h3>{plan.featured && <span className="badge">Recomendado</span>}</div>
         <p className="plan-for">{plan.for}</p>
         <p className="price">{plan.price ? <><span>Desde</span>{plan.price} <small>COP</small></> : <>Cotización <small>personalizada</small></>}</p>
