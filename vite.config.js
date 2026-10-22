@@ -7,7 +7,7 @@ export default defineConfig(({ mode }) => {
   const apiProxy = { '/api': { target: apiTarget, changeOrigin: true } };
 
   return {
-    base: '/NEBU-Experiencias-Agencia-Web/',
+    base: '/',
     plugins: [react()],
     publicDir: 'public',
     server: { proxy: apiProxy },

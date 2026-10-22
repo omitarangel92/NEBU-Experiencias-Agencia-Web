@@ -1,19 +1,6 @@
-import express from 'express';
-import rateLimit from 'express-rate-limit';
-import { existsSync, readFileSync } from 'node:fs';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import companyProfile from './knowledge/company.json' with { type: 'json' };
 
-const app = express();
-const port = Number(process.env.PORT || process.env.API_PORT || 8787);
-const apiKey = process.env.OPENAI_API_KEY;
-const model = process.env.OPENAI_MODEL || 'gpt-4.1-mini';
-const host = process.env.HOST || '127.0.0.1';
-const appRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const companyProfile = JSON.parse(readFileSync(path.join(appRoot, 'api', 'knowledge', 'company.json'), 'utf8'));
-const shouldServeFrontend = process.argv.includes('--web');
-
-function createAdvisorInstructions() {
+export function createAdvisorInstructions() {
     const { conversationPolicy, ...businessFacts } = companyProfile;
     return [
         `# ROL E IDENTIDAD`,
@@ -38,28 +25,12 @@ function createAdvisorInstructions() {
     ].join('\n\n');
 }
 
-app.disable('x-powered-by');
-app.use(express.json({ limit: '12kb' }));
+// Devuelve { status, body } para que lo usen tanto Express como las funciones de Vercel.
+export async function answerChat(incoming, { apiKey, model = 'gpt-4.1-mini' }) {
+    if (!apiKey) return { status: 503, body: { error: 'chat_not_configured' } };
 
-const chatLimiter = rateLimit({
-    windowMs: 60_000,
-    limit: 12,
-    standardHeaders: 'draft-8',
-    legacyHeaders: false,
-    message: { error: 'rate_limit_exceeded' },
-});
-
-app.get('/api/health', (_request, response) => {
-    response.set('Cache-Control', 'no-store');
-    response.json({ configured: Boolean(apiKey) });
-});
-
-app.post('/api/chat', chatLimiter, async (request, response) => {
-    if (!apiKey) return response.status(503).json({ error: 'chat_not_configured' });
-
-    const incoming = request.body?.messages;
     if (!Array.isArray(incoming) || incoming.length === 0 || incoming.length > 12) {
-        return response.status(400).json({ error: 'invalid_messages' });
+        return { status: 400, body: { error: 'invalid_messages' } };
     }
 
     const messages = incoming.map((item) => {
@@ -69,7 +40,7 @@ app.post('/api/chat', chatLimiter, async (request, response) => {
     });
 
     if (messages.some((item) => !item) || messages.at(-1).role !== 'user') {
-        return response.status(400).json({ error: 'invalid_messages' });
+        return { status: 400, body: { error: 'invalid_messages' } };
     }
 
     const controller = new AbortController();
@@ -94,7 +65,7 @@ app.post('/api/chat', chatLimiter, async (request, response) => {
 
         if (!upstream.ok) {
             console.error('OpenAI Responses API returned status', upstream.status);
-            return response.status(502).json({ error: 'chat_provider_error' });
+            return { status: 502, body: { error: 'chat_provider_error' } };
         }
 
         const data = await upstream.json();
@@ -106,24 +77,12 @@ app.post('/api/chat', chatLimiter, async (request, response) => {
             .join('\n')
             .trim();
 
-        if (!reply) return response.status(502).json({ error: 'empty_provider_response' });
-        return response.json({ reply });
+        if (!reply) return { status: 502, body: { error: 'empty_provider_response' } };
+        return { status: 200, body: { reply } };
     } catch (error) {
-        const status = error.name === 'AbortError' ? 504 : 502;
         console.error('Chat provider request failed:', error.name);
-        return response.status(status).json({ error: 'chat_unavailable' });
+        return { status: error.name === 'AbortError' ? 504 : 502, body: { error: 'chat_unavailable' } };
     } finally {
         clearTimeout(timeout);
     }
-});
-
-if (shouldServeFrontend) {
-    const distPath = path.join(appRoot, 'dist');
-    if (!existsSync(distPath)) throw new Error('Run npm run build before npm start.');
-    app.use(express.static(distPath));
-    app.get('*path', (_request, response) => response.sendFile(path.join(distPath, 'index.html')));
 }
-
-app.listen(port, host, () => {
-    console.log(`Chat API listening on http://127.0.0.1:${port}`);
-});

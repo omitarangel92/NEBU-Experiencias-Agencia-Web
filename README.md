@@ -13,7 +13,7 @@ The chat uses OpenAI's Responses API. `OPENAI_MODEL` defaults to `gpt-4.1-mini`.
 
 ## Advisor knowledge and tone
 
-Edit `api/knowledge/company.json` to update NebuExperiencias' services, plan prices, included work, courses, and conversation policy. The API loads this file as trusted context for each answer. Keep it factual and update it whenever the website's offers change; restart the API after editing it. The tone rules ask one useful question at a time, recommend a fitting option without pressure, answer warmly but concisely, and say when information is not known.
+Edit `server/knowledge/company.json` to update NebuExperiencias' services, plan prices, included work, courses, and conversation policy. The API loads this file as trusted context for each answer. Keep it factual and update it whenever the website's offers change; restart the API after editing it. The tone rules ask one useful question at a time, recommend a fitting option without pressure, answer warmly but concisely, and say when information is not known.
 
 ## Production
 
