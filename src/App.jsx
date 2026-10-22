@@ -135,20 +135,45 @@ function Hero({ reduced }) {
 function HeroArtwork({ slide, reduced }) {
   const animation = reduced ? {} : { y: [0, -9, 0], rotateZ: [-0.8, 0.8, -0.8] };
   const transition = reduced ? {} : { duration: 6.5, repeat: Infinity, ease: 'easeInOut' };
-  return <div className="hero-artwork" aria-label={slide.visualAlt} role="img">
-    <motion.div className="hero-artwork-halo" aria-hidden="true" animate={reduced ? {} : { rotate: 360 }} transition={reduced ? {} : { duration: 42, repeat: Infinity, ease: 'linear' }} />
-    <AnimatePresence initial={false} mode="wait">
-      <motion.figure className="hero-artwork-frame" key={slide.visualImage} initial={reduced ? false : { opacity: 0, scale: 0.96, y: 12 }} animate={{ opacity: 1, scale: 1, ...animation }} exit={reduced ? { opacity: 0 } : { opacity: 0, scale: 0.98, y: -8 }} transition={{ opacity: { duration: 0.22 }, scale: { duration: 0.32, ease: EASE }, y: transition.y ? { duration: transition.duration, repeat: transition.repeat, ease: transition.ease } : { duration: 0.25 }, rotateZ: transition.rotateZ ? { duration: transition.duration, repeat: transition.repeat, ease: transition.ease } : { duration: 0.25 } }}>
-        <img className="hero-artwork-image" src={slide.visualImage} alt="" loading="eager" />
-        <span className="hero-artwork-label"><span className="hero-artwork-live" />{slide.visualLabel}</span>
-        <motion.div className="hero-artwork-note" aria-hidden="true" animate={reduced ? {} : { y: [0, -5, 0] }} transition={reduced ? {} : { duration: 4.8, repeat: Infinity, ease: 'easeInOut' }}>
-          <Icon name={currentVisualIcon(slide.visualLabel)} />
-          <span>{slide.visualNote}</span>
-        </motion.div>
-        <span className="hero-artwork-index" aria-hidden="true">0{slides.indexOf(slide) + 1} / 03</span>
-      </motion.figure>
-    </AnimatePresence>
-  </div>;
+  return (
+    <div className="hero-artwork" aria-label={slide.visualAlt} role="img">
+      <motion.div className="hero-artwork-halo" aria-hidden="true" animate={reduced ? {} : { rotate: 360 }} transition={reduced ? {} : { duration: 42, repeat: Infinity, ease: 'linear' }} />
+      <AnimatePresence initial={false} mode="wait">
+        <motion.figure className="hero-artwork-frame" key={slide.visualImage} initial={reduced ? false : { opacity: 0, scale: 0.96, y: 12 }} animate={{ opacity: 1, scale: 1, ...animation }} exit={reduced ? { opacity: 0 } : { opacity: 0, scale: 0.98, y: -8 }} transition={{ opacity: { duration: 0.22 }, scale: { duration: 0.32, ease: EASE }, y: transition.y ? { duration: transition.duration, repeat: transition.repeat, ease: transition.ease } : { duration: 0.25 }, rotateZ: transition.rotateZ ? { duration: transition.duration, repeat: transition.repeat, ease: transition.ease } : { duration: 0.25 } }}>
+          <img className="hero-artwork-image" src={slide.visualImage} alt="" loading="eager" />
+          
+          {/* Glassmorphic Card 1 */}
+          <motion.div 
+            className="hero-artwork-card card-1"
+            initial={reduced ? false : { opacity: 0, x: 30, y: -20 }}
+            animate={{ opacity: 1, x: 0, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: EASE }}
+          >
+            <span className="card-kicker">{slide.kicker}</span>
+            <p className="card-text">{slide.title.split('/')[0].trim()}</p>
+          </motion.div>
+
+          {/* Glassmorphic Card 2 */}
+          <motion.div 
+            className="hero-artwork-card card-2"
+            initial={reduced ? false : { opacity: 0, x: -30, y: 20 }}
+            animate={{ opacity: 1, x: 0, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4, ease: EASE }}
+          >
+            <span className="card-kicker">{slide.points[0]?.[1]?.split(' ')[0] || 'Recurso'}</span>
+            <p className="card-text">{slide.points[0]?.[1]?.substring(0, 35) || 'Información destacada'}</p>
+          </motion.div>
+
+          <span className="hero-artwork-label"><span className="hero-artwork-live" />{slide.visualLabel}</span>
+          <motion.div className="hero-artwork-note" aria-hidden="true" animate={reduced ? {} : { y: [0, -5, 0] }} transition={reduced ? {} : { duration: 4.8, repeat: Infinity, ease: 'easeInOut' }}>
+            <Icon name={currentVisualIcon(slide.visualLabel)} />
+            <span>{slide.visualNote}</span>
+          </motion.div>
+          <span className="hero-artwork-index" aria-hidden="true">0{slides.indexOf(slide) + 1} / 03</span>
+        </motion.figure>
+      </AnimatePresence>
+    </div>
+  );
 }
 
 function currentVisualIcon(label) {
