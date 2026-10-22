@@ -999,7 +999,7 @@ main {
 }
 
 .plan:nth-child(3) {
-  --plan-glow: #6aa9ff;
+  --plan-glow: #ffb85c;
 }
 
 .plan::before {
@@ -1037,18 +1037,8 @@ main {
 }
 
 .plan .btn:hover {
-  background: color-mix(in srgb, var(--plan-glow) 28%, var(--bg));
+  background: color-mix(in srgb, var(--plan-glow) 28%, #171b27);
   box-shadow: 0 0 22px color-mix(in srgb, var(--plan-glow) 26%, transparent);
-}
-
-.plan.plan-featured .btn {
-  border-color: transparent;
-  background: var(--accent);
-  color: var(--accent-ink);
-}
-
-.plan.plan-featured .btn:hover {
-  background: color-mix(in srgb, var(--accent) 88%, #000);
 }
 
 .plan .checks {
@@ -1511,18 +1501,18 @@ main {
   gap: 11px;
   min-height: 58px;
   padding: 0 20px;
-  border: 1px solid rgba(255, 255, 255, .32);
+  border: 1px solid rgba(255, 255, 255, .54);
   border-radius: var(--r-pill);
-  background: linear-gradient(135deg, #4551c8, #7a6af0);
-  color: #fff;
-  box-shadow: 0 12px 32px rgba(69, 81, 200, .38);
+  background: linear-gradient(105deg, #71e6d4, #cbfffc 50%, #f8d2ff);
+  color: #082c2c;
+  box-shadow: 0 12px 32px rgba(0, 65, 67, .24);
   font: 700 .95rem var(--font-head);
   cursor: pointer;
   transition: transform .25s ease, box-shadow .25s ease;
 }
 
 .ai-chat-trigger:hover {
-  box-shadow: 0 16px 38px rgba(69, 81, 200, .5);
+  box-shadow: 0 16px 38px rgba(0, 65, 67, .32);
 }
 
 .ai-chat-trigger-icon,
@@ -1786,6 +1776,36 @@ main {
 }
 
 /* ---------- Responsive ---------- */
+@media (min-width: 1600px) {
+  .container {
+    width: min(1480px, 100% - 96px);
+  }
+
+  html {
+    font-size: 17px;
+  }
+}
+
+@media (min-width: 2200px) {
+  .container {
+    width: min(1680px, 100% - 160px);
+  }
+
+  html {
+    font-size: 19px;
+  }
+}
+
+@media (min-width: 761px) and (max-width: 1000px) {
+  .plans-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .plan {
+    padding: 26px 16px;
+  }
+}
+
 @media (max-width: 1000px) {
   .about-grid {
     grid-template-columns: 1fr;
@@ -1793,20 +1813,16 @@ main {
   }
 
   .hero-layout {
-    grid-template-columns: minmax(0, 1fr) minmax(260px, .8fr);
-    gap: 26px;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .hero-title {
     font-size: clamp(2.1rem, 4.5vw, 3rem);
   }
 
-  .hero-artwork {
-    height: 340px;
-  }
-
+  .hero-artwork,
   .hero-artwork-note {
-    right: -8px;
+    display: none;
   }
 
   .services-grid {
