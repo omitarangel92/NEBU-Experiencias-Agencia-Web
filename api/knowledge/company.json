@@ -1,0 +1,90 @@
+{
+  "brand": "NebuExperiencias",
+  "locale": "es-CO",
+  "market": "Colombia",
+  "currency": "COP",
+  "positioning": "Agencia que ayuda a negocios a atender mejor, vender más y ahorrar tiempo con sitios web modernos y automatización con inteligencia artificial.",
+  "valuePropositions": [
+    {
+      "problem": "Pérdida de clientes por no responder rápido en WhatsApp.",
+      "solution": "Automatización con IA que califica, atiende y agenda 24/7 sin sonar como un robot estático."
+    },
+    {
+      "problem": "Sitios web antiguos que no cargan bien en celulares o no generan ventas.",
+      "solution": "Rediseño enfocado en velocidad, conversión y experiencia fluida desde cualquier dispositivo."
+    }
+  ],
+  "services": [
+    {
+      "id": "web-dinamica",
+      "name": "Desarrollo web dinámico",
+      "summary": "Sitios modernos, veloces y adaptados a celulares, tabletas y computadores.",
+      "includes": [
+        "Diseño a la medida de la marca",
+        "Optimización para Google (SEO)",
+        "Formularios, reservas y pagos integrados"
+      ]
+    },
+    {
+      "id": "ia-automation",
+      "name": "Automatización con IA",
+      "summary": "Asistentes para WhatsApp y chat web que responden preguntas y atienden clientes 24/7.",
+      "includes": [
+        "Respuestas entrenadas con la información exacta del negocio",
+        "Agendamiento automático y toma de pedidos",
+        "Transferencia a un agente humano cuando sea necesario"
+      ]
+    },
+    {
+      "id": "rediseno-optimizacion",
+      "name": "Optimización y rediseño",
+      "summary": "Mejoras para hacer un sitio existente más rápido, claro y fácil de usar.",
+      "includes": [
+        "Auditoría de velocidad y usabilidad",
+        "Rediseño conservando posicionamiento en Google",
+        "Estrategia de llamados a la acción para aumentar ventas"
+      ]
+    }
+  ],
+  "plans": [
+    {
+      "name": "Esencial",
+      "priceFrom": 1200000,
+      "includes": [
+        "Sitio web de hasta 5 secciones",
+        "Diseño 100% adaptable a celulares",
+        "Botón directo de contacto a WhatsApp",
+        "1 mes de soporte técnico incluido"
+      ]
+    },
+    {
+      "name": "Crecimiento",
+      "priceFrom": 2800000,
+      "includes": [
+        "Todo lo incluido en el Plan Esencial",
+        "Asistente con IA en WhatsApp o chat web",
+        "Sistema de agendamiento o catálogo integrado",
+        "3 meses de soporte técnico y ajustes"
+      ]
+    },
+    {
+      "name": "A la medida",
+      "price": "Cotización personalizada",
+      "bestFor": "E-commerce, plataformas web, software personalizado e integraciones específicas."
+    }
+  ],
+  "courses": [
+    { "name": "Tu primera web, paso a paso", "level": "Inicial", "duration": "4 horas" },
+    { "name": "Asistente de WhatsApp con IA", "level": "Intermedio", "duration": "6 horas" },
+    { "name": "IA para tu negocio", "level": "Inicial", "duration": "3 horas" }
+  ],
+  "conversationPolicy": {
+    "tone": "Español colombiano, relajado, amable, empático y profesional. Cercano y seguro, nunca frío, cortante, insistente ni exageradamente efusivo.",
+    "length": "Responde normalmente en 2 a 4 frases breves y bien estructuradas. Sé preciso, pero añade una explicación corta cuando ayude a dar contexto sin sonar seco.",
+    "sales": "Metodología consultiva: Primero comprende el problema real del negocio. Conecta su dolor con el servicio correcto, explica el valor estratégico, recomienda el plan adecuado y finaliza con una pregunta orientadora o invitación abierta a cotizar sin presionar.",
+    "pricing": "Expresa los precios en COP. Los precios publicados son valores desde; aclara que el valor final depende del alcance y requiere cotización.",
+    "truthfulness": "Usa únicamente esta información oficial. No inventes funciones, disponibilidad, fechas de entrega, garantías, descuentos ni resultados. Si algo no está especificado, dilo con claridad y ofrece confirmarlo con el equipo.",
+    "privacy": "No solicites contraseñas, claves API, números de tarjeta, datos bancarios ni documentos personales. Pide solo la información mínima para orientar.",
+    "identity": "Si preguntan, explica con transparencia que eres el asistente virtual inteligente de NebuExperiencias; no afirmes ser una persona."
+  }
+}
