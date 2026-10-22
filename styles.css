@@ -999,7 +999,7 @@ main {
 }
 
 .plan:nth-child(3) {
-  --plan-glow: #ffb85c;
+  --plan-glow: #6aa9ff;
 }
 
 .plan::before {
@@ -1037,8 +1037,18 @@ main {
 }
 
 .plan .btn:hover {
-  background: color-mix(in srgb, var(--plan-glow) 28%, #171b27);
+  background: color-mix(in srgb, var(--plan-glow) 28%, var(--bg));
   box-shadow: 0 0 22px color-mix(in srgb, var(--plan-glow) 26%, transparent);
+}
+
+.plan.plan-featured .btn {
+  border-color: transparent;
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.plan.plan-featured .btn:hover {
+  background: color-mix(in srgb, var(--accent) 88%, #000);
 }
 
 .plan .checks {
@@ -1332,7 +1342,7 @@ main {
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr;
+  grid-template-columns: 1.2fr .8fr minmax(340px, 1fr);
   gap: 48px;
 }
 
@@ -1373,22 +1383,33 @@ main {
 .socials {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 12px;
+}
+
+.socials .icon-btn {
+  width: 46px;
+  height: 46px;
+}
+
+.socials .icon-btn svg {
+  width: 19px;
+  height: 19px;
 }
 
 .footer-policies {
-  margin-top: 28px;
-  padding-top: 24px;
-  padding-bottom: 24px;
-  border-top: 1px solid var(--sh-d);
-  border-bottom: 1px solid var(--sh-d);
+  margin-top: 48px;
 }
 
-.footer-policies ul {
+.footer-policies .container {
+  padding-top: 24px;
+  border-top: 1px solid var(--sh-d);
+}
+
+.site-footer .footer-policies ul {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 24px;
+  gap: 10px 28px;
 }
 
 .footer-policies a,
@@ -1467,15 +1488,10 @@ main {
 }
 
 .footer-bottom {
-  margin-top: 56px;
-  padding-top: 24px;
+  margin-top: 24px;
   color: var(--muted);
   font-size: .92rem;
-  border-top: 2px solid var(--sh-d);
-}
-
-[data-theme="light"] .footer-bottom {
-  border-top-color: var(--sh-d);
+  text-align: center;
 }
 
 /* ---------- Chat IA flotante ---------- */
@@ -1495,18 +1511,18 @@ main {
   gap: 11px;
   min-height: 58px;
   padding: 0 20px;
-  border: 1px solid rgba(255, 255, 255, .54);
+  border: 1px solid rgba(255, 255, 255, .32);
   border-radius: var(--r-pill);
-  background: linear-gradient(105deg, #71e6d4, #cbfffc 50%, #f8d2ff);
-  color: #082c2c;
-  box-shadow: 0 12px 32px rgba(0, 65, 67, .24);
+  background: linear-gradient(135deg, #4551c8, #7a6af0);
+  color: #fff;
+  box-shadow: 0 12px 32px rgba(69, 81, 200, .38);
   font: 700 .95rem var(--font-head);
   cursor: pointer;
   transition: transform .25s ease, box-shadow .25s ease;
 }
 
 .ai-chat-trigger:hover {
-  box-shadow: 0 16px 38px rgba(0, 65, 67, .32);
+  box-shadow: 0 16px 38px rgba(69, 81, 200, .5);
 }
 
 .ai-chat-trigger-icon,
@@ -1939,7 +1955,7 @@ main {
   }
 
   .hero-shade {
-    background: linear-gradient(180deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 98%, transparent) 37%, color-mix(in srgb, var(--bg) 76%, transparent) 58%, transparent 100%);
+    background: linear-gradient(180deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 94%, transparent) 45%, color-mix(in srgb, var(--bg) 84%, transparent) 100%);
   }
 
   .hero-artwork {
@@ -2069,23 +2085,18 @@ main {
   }
 
   .plans-grid.plans-carousel {
-    position: relative;
-    display: block;
+    display: grid;
     width: 100%;
-    height: 530px;
     margin: 0 auto;
+    padding-top: 18px;
     overflow: visible;
     touch-action: pan-y;
-    perspective: 1200px;
   }
 
   .plans-carousel .plan-slide {
-    position: absolute;
-    top: 8px;
-    left: 50%;
+    grid-area: 1 / 1;
+    justify-self: center;
     width: min(84%, 420px);
-    height: calc(100% - 16px);
-    min-height: 0;
     margin: 0;
     transform-origin: center;
     transition: transform .35s ease, opacity .35s ease, filter .35s ease;
@@ -2095,7 +2106,7 @@ main {
     z-index: 3;
     opacity: 1;
     pointer-events: auto;
-    transform: translateX(-50%) scale(1);
+    transform: scale(1);
     filter: none;
   }
 
@@ -2103,7 +2114,7 @@ main {
     z-index: 2;
     opacity: .6;
     pointer-events: none;
-    transform: translateX(calc(-50% + 58%)) scale(.9);
+    transform: translateX(58%) scale(.9);
     filter: brightness(.84);
   }
 
@@ -2111,7 +2122,7 @@ main {
     z-index: 2;
     opacity: .6;
     pointer-events: none;
-    transform: translateX(calc(-50% - 58%)) scale(.9);
+    transform: translateX(-58%) scale(.9);
     filter: brightness(.84);
   }
 
@@ -2164,34 +2175,47 @@ main {
   }
 
   .course-row {
-    grid-template-columns: 88px minmax(0, 1fr);
+    grid-template-columns: 1fr;
     gap: 14px;
     padding: 12px;
   }
 
+  .course-row:hover {
+    transform: none;
+  }
+
   .course-art {
-    min-height: 176px;
+    min-height: 150px;
   }
 
   .course-copy {
-    padding: 4px 0;
+    padding: 2px 6px 6px;
   }
 
   .course-copy h3 {
-    font-size: 1.05rem;
+    font-size: 1.1rem;
   }
 
   .course .meta {
-    gap: 5px 12px;
-    font-size: .76rem;
+    gap: 5px 14px;
+    font-size: .8rem;
   }
 
   .course .text-link {
-    font-size: .82rem;
+    font-size: .9rem;
   }
 
   .footer-grid {
     grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .site-footer {
+    padding-bottom: 96px;
+  }
+
+  .footer-bottom {
+    padding-right: 0;
   }
 
   .ai-chat {
