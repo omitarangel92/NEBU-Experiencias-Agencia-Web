@@ -2128,11 +2128,12 @@ main {
   }
 
   .plans-nav-prev {
-    left: 4px;
+    left: calc(50% - 46px);
   }
 
   .plans-nav-next {
-    right: 4px;
+    right: auto;
+    left: calc(50% + 6px);
   }
 }
 
