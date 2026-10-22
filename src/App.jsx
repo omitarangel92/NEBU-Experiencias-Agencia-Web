@@ -437,7 +437,6 @@ function Plans({ reduced }) {
       <button className="plans-nav plans-nav-prev" type="button" aria-label="Ver plan anterior" onClick={() => api.current.prev?.()}><Icon name="ChevronLeft" /></button>
       <button className="plans-nav plans-nav-next" type="button" aria-label="Ver siguiente plan" onClick={() => api.current.next?.()}><Icon name="ChevronRight" /></button>
     </div>
-    <div className="plans-tabs" role="group" aria-label="Elegir plan">{plans.map((plan, index) => <button key={plan.name} type="button" className={`plans-tab ${current === index ? 'is-active' : ''}`} style={{ '--plan-glow': plan.color }} aria-pressed={current === index} onClick={() => api.current.jump?.(index)}>{plan.name}</button>)}</div>
     <p className="plans-note">Precios en pesos colombianos (COP), sin IVA. Dominio y hosting incluidos el primer año; después se renuevan a tarifa del proveedor.</p>
   </div></section>;
 }

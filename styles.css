@@ -1312,30 +1312,6 @@ main {
   right: 0;
 }
 
-.plans-tabs {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 18px;
-}
-
-.plans-tab {
-  padding: 9px 20px;
-  border: 1px solid color-mix(in srgb, var(--plan-glow) 50%, transparent);
-  border-radius: var(--r-pill);
-  background: transparent;
-  color: var(--text);
-  font: 600 .9rem var(--font-body);
-  cursor: pointer;
-  transition: background-color .25s ease, box-shadow .25s ease;
-}
-
-.plans-tab.is-active {
-  background: color-mix(in srgb, var(--plan-glow) 30%, transparent);
-  box-shadow: 0 0 20px color-mix(in srgb, var(--plan-glow) 32%, transparent);
-}
-
 .plans-note {
   max-width: 62ch;
   margin: 18px auto 0;
@@ -1375,8 +1351,7 @@ main {
 }
 
 [data-theme="dark"] .plan h3,
-[data-theme="dark"] .plan .plan-cta,
-[data-theme="dark"] .plans-tab {
+[data-theme="dark"] .plan .plan-cta {
   color: #fff;
 }
 
