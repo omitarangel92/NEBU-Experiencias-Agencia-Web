@@ -1049,10 +1049,39 @@ main {
 }
 
 .plans-deck {
-  --card-w: clamp(300px, 26vw, 380px);
-  --card-h: 650px;
+  --card-w: min(86vw, 330px);
+  --card-h: 570px;
   position: relative;
   isolation: isolate;
+}
+
+@media (max-width: 345px) {
+  .plans-deck {
+    --card-h: 595px;
+  }
+}
+
+@media (min-width: 561px) {
+  .plans-deck {
+    --card-w: 440px;
+    --card-h: 590px;
+  }
+}
+
+@media (min-width: 1001px) {
+  .plans-deck {
+    --card-w: clamp(600px, 52vw, 760px);
+    --card-h: 520px;
+  }
+
+  .plan-list {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 22px;
+  }
+
+  .plan {
+    padding: 28px 32px 28px;
+  }
 }
 
 .plans-glow {
@@ -2019,28 +2048,91 @@ main {
   }
 }
 
-@media (max-width: 1000px) {
-  .plans-deck {
-    --card-w: min(86vw, 340px);
-  }
-}
-
 @media (max-width: 560px) {
-  .plans-deck {
-    --card-h: 670px;
+  .plans-stage {
+    height: calc(var(--card-h) + 40px);
   }
 
-  .plans-nav {
+  .plan {
+    gap: 10px;
+    padding: 20px 18px 18px;
+  }
+
+  .plan-body {
+    gap: 9px;
+  }
+
+  .plan-icon {
     width: 44px;
     height: 44px;
   }
 
+  .plan-icon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .plan h3 {
+    font-size: 1.3rem;
+  }
+
+  .badge {
+    padding: 4px 10px;
+    font-size: .7rem;
+  }
+
+  .plan-for {
+    font-size: .85rem;
+  }
+
+  .price {
+    font-size: 1.6rem;
+  }
+
+  .plan-includes {
+    padding-top: 9px;
+    font-size: .68rem;
+  }
+
+  .plan-list {
+    gap: 7px;
+  }
+
+  .plan-list li {
+    gap: 9px;
+    font-size: .8rem;
+  }
+
+  .plan-bullet {
+    width: 24px;
+    height: 24px;
+    border-radius: 8px;
+  }
+
+  .plan-bullet svg {
+    width: 13px;
+    height: 13px;
+  }
+
+  .plan .plan-cta {
+    min-height: 46px;
+    font-size: .9rem;
+  }
+
+  .plans-nav {
+    top: auto;
+    bottom: -4px;
+    width: 40px;
+    height: 40px;
+    transform: none;
+  }
+
   .plans-nav-prev {
-    left: -6px;
+    left: 4px;
   }
 
   .plans-nav-next {
-    right: -6px;
+    right: 4px;
   }
 }
 
