@@ -15,9 +15,9 @@ const EASE = [0.23, 1, 0.32, 1];
 const icons = { ArrowUpRight, Bot, CalendarCheck, Check, ChevronLeft, ChevronRight, Clock, Clock3, Code, Database, Eye, Gauge, Globe, HeartHandshake, Headset, LayoutTemplate, Layers, Mail, Menu, MessageCircle, MessagesSquare, Moon, MoreHorizontal, Palette, Pause, Play, Plug, RefreshCw, Rocket, Search, Send, Server, ShieldCheck, ShoppingCart, Signal, Smartphone, Sparkles, Sun, TrendingUp, WandSparkles, Wrench, X, Zap };
 const nav = [['home', 'Home'], ['quienes-somos', 'Quiénes somos'], ['servicios', 'Servicios'], ['planes', 'Planes'], ['cursos', 'Cursos']];
 const slides = [
-  { image: 'https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=1600&q=65', video: 'videos/hero-1.mp4', kicker: 'Automatización inteligente', title: 'Tecnología que atiende a tus clientes mientras tú descansas', copy: 'Diseñamos sitios web rápidos y asistentes de inteligencia artificial para WhatsApp y chat web que responden, orientan y venden las 24 horas.', action: 'Hablar por WhatsApp', message: 'Hola, quiero conocer los servicios de NebuExperiencias', points: [['Zap', 'Sitios que cargan en menos de 2 segundos'], ['Clock', 'Asistentes activos 24/7']] },
-  { image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=65', video: 'videos/hero-2.mp4', kicker: 'Diseño y desarrollo', title: 'Sitios web modernos que convierten visitas en clientes', copy: 'Desarrollamos páginas veloces, atractivas y adaptadas a cualquier pantalla, para que tu negocio se vea profesional y venda más.', action: 'Cotizar mi sitio web', message: 'Hola, quiero cotizar un sitio web', points: [['Smartphone', 'Diseño adaptable a celular, tablet y computador'], ['Search', 'Optimizado para aparecer en Google']] },
-  { image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=65', video: 'videos/hero-3.mp4', kicker: 'Optimización y crecimiento', title: 'Tu sitio actual puede cargar más rápido y vender más', copy: 'Revisamos y rediseñamos tu página para que sea más clara, más veloz y mucho más fácil de usar desde el celular.', action: 'Pedir una revisión', message: 'Hola, quiero una revisión de mi sitio web actual', points: [['Gauge', 'Auditoría de velocidad y usabilidad'], ['RefreshCw', 'Rediseño sin perder tu posicionamiento']] },
+  { image: 'https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=2400&q=90', kicker: 'Automatización inteligente', title: 'Tecnología que atiende a tus clientes mientras tú descansas', copy: 'Diseñamos sitios web rápidos y asistentes de inteligencia artificial para WhatsApp y chat web que responden, orientan y venden las 24 horas.', action: 'Hablar por WhatsApp', message: 'Hola, quiero conocer los servicios de NebuExperiencias', points: [['Zap', 'Sitios que cargan en menos de 2 segundos'], ['Clock', 'Asistentes activos 24/7']] },
+  { image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=2400&q=90', kicker: 'Diseño y desarrollo', title: 'Sitios web modernos que convierten visitas en clientes', copy: 'Desarrollamos páginas veloces, atractivas y adaptadas a cualquier pantalla, para que tu negocio se vea profesional y venda más.', action: 'Cotizar mi sitio web', message: 'Hola, quiero cotizar un sitio web', points: [['Smartphone', 'Diseño adaptable a celular, tablet y computador'], ['Search', 'Optimizado para aparecer en Google']] },
+  { image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=2400&q=90', kicker: 'Optimización y crecimiento', title: 'Tu sitio actual puede cargar más rápido y vender más', copy: 'Revisamos y rediseñamos tu página para que sea más clara, más veloz y mucho más fácil de usar desde el celular.', action: 'Pedir una revisión', message: 'Hola, quiero una revisión de mi sitio web actual', points: [['Gauge', 'Auditoría de velocidad y usabilidad'], ['RefreshCw', 'Rediseño sin perder tu posicionamiento']] },
 ];
 const services = [
   { icon: 'LayoutTemplate', art: 'service-art-web', title: 'Desarrollo web dinámico', copy: 'Sitios modernos, veloces y adaptados a celular, tablet y computador, listos para convertir visitas en clientes.', points: ['Diseño a la medida de tu marca', 'Optimizado para Google', 'Formularios, reservas y pagos'] },
@@ -116,8 +116,7 @@ function Hero({ reduced }) {
     <section className="hero" id="home" aria-roledescription="carrusel" aria-label="Servicios destacados" onMouseEnter={() => setHoverPaused(true)} onMouseLeave={() => setHoverPaused(false)} onFocusCapture={pauseForFocus} onBlurCapture={resumeAfterFocus}>
       <div className="hero-slides"><AnimatePresence initial={false} mode="wait">
         <motion.div className="hero-slide is-active" key={current} role="group" aria-roledescription="diapositiva" aria-label={`${current + 1} de ${slides.length}`}>
-          <motion.img className="hero-bg" src={slide.image} srcSet={` 800w,  1600w`} sizes="100vw" width="1600" height="1000" alt="" aria-hidden="true" fetchPriority={current === 0 ? 'high' : 'auto'} initial={false} animate={reduced ? {} : { scale: [1.025, 1.075], x: ['0%', '-1%'], y: ['0%', '1%'] }} transition={{ duration: 18, repeat: Infinity, repeatType: 'mirror', ease: 'easeInOut' }} />
-          <HeroVideo slide={slide} reduced={reduced} />
+          <motion.img className="hero-bg" src={slide.image} srcSet={` 800w,  1600w`} sizes="100vw" width="2400" height="1500" alt="" aria-hidden="true" fetchPriority={current === 0 ? 'high' : 'auto'} initial={false} animate={reduced ? {} : { scale: [1.025, 1.075], x: ['0%', '-1%'], y: ['0%', '1%'] }} transition={{ duration: 18, repeat: Infinity, repeatType: 'mirror', ease: 'easeInOut' }} />
           <div className="hero-shade" aria-hidden="true" />
           <div className="container hero-layout">
             <motion.div className="hero-copy" initial={reduced ? false : { opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.58, ease: EASE }}>
@@ -133,25 +132,6 @@ function Hero({ reduced }) {
       </div>
     </section>
   );
-}
-
-function HeroVideo({ slide, reduced }) {
-  const [failed, setFailed] = useState(false);
-  const [available, setAvailable] = useState(false);
-  const src = `${import.meta.env.BASE_URL}${slide.video}`;
-  useEffect(() => {
-    if (reduced) return undefined;
-    const controller = new AbortController();
-    setAvailable(false);
-    setFailed(false);
-    // Evita un error 404 en consola mientras el video aún no exista
-    fetch(src, { method: 'HEAD', signal: controller.signal })
-      .then((res) => setAvailable(res.ok && (res.headers.get('content-type') || '').startsWith('video')))
-      .catch(() => {});
-    return () => controller.abort();
-  }, [src, reduced]);
-  if (failed || reduced || !available) return null;
-  return <video className="hero-video" src={`${import.meta.env.BASE_URL}${slide.video}`} poster={slide.image} autoPlay muted loop playsInline preload="metadata" aria-hidden="true" tabIndex={-1} onError={() => setFailed(true)} />;
 }
 
 function VideoButton() {
