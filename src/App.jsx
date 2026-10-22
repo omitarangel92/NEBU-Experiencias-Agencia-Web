@@ -7,15 +7,15 @@ import {
   Share2, Signal, Smartphone, Sparkles, Sun, WandSparkles, X, Zap,
 } from 'lucide-react';
 
-const WA_NUMBER = '573000000000';
+const WA_NUMBER = '573106598981';
 const HOTMART = ['https://hotmart.com', 'https://hotmart.com', 'https://hotmart.com'];
 const EASE = [0.23, 1, 0.32, 1];
 const icons = { ArrowUpRight, Bot, Check, ChevronLeft, ChevronRight, Clock, Clock3, Eye, Gauge, Globe, HeartHandshake, LayoutTemplate, Menu, MessageCircle, MessagesSquare, Moon, MoreHorizontal, Pause, Play, RefreshCw, Rocket, Search, Send, Signal, Smartphone, Sparkles, Sun, WandSparkles, X, Zap };
 const nav = [['home', 'Home'], ['quienes-somos', 'Quiénes somos'], ['servicios', 'Servicios'], ['planes', 'Planes'], ['cursos', 'Cursos']];
 const slides = [
-  { image: 'https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=2400&q=90', visualImage: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1400&q=88', visualAlt: 'Visualización luminosa de inteligencia artificial y datos', visualLabel: 'IA PARA TU NEGOCIO', visualNote: 'Asistente activo 24/7', kicker: 'Automatización inteligente', title: 'Tecnología que atiende a tus clientes mientras tú descansas', copy: 'Diseñamos sitios web rápidos y asistentes de inteligencia artificial para WhatsApp y chat web que responden, orientan y venden las 24 horas.', action: 'Hablar por WhatsApp', message: 'Hola, quiero conocer los servicios de NebuExperiencias', points: [['Zap', 'Sitios que cargan en menos de 2 segundos'], ['Clock', 'Asistentes activos 24/7']] },
-  { image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=2400&q=90', visualImage: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1400&q=88', visualAlt: 'Diseñador trabajando en una experiencia web desde un portátil', visualLabel: 'DISEÑO WEB', visualNote: 'Adaptable a cada pantalla', kicker: 'Diseño y desarrollo', title: 'Sitios web modernos que convierten visitas en clientes', copy: 'Desarrollamos páginas veloces, atractivas y adaptadas a cualquier pantalla, para que tu negocio se vea profesional y venda más.', action: 'Cotizar mi sitio web', message: 'Hola, quiero cotizar un sitio web', points: [['Smartphone', 'Diseño adaptable a celular, tablet y computador'], ['Search', 'Optimizado para aparecer en Google']] },
-  { image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=2400&q=90', visualImage: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1400&q=88', visualAlt: 'Panel digital de analítica con gráficas de rendimiento web', visualLabel: 'OPTIMIZACIÓN WEB', visualNote: 'Más rápido · más claro', kicker: 'Optimización y crecimiento', title: 'Tu sitio actual puede cargar más rápido y vender más', copy: 'Revisamos y rediseñamos tu página para que sea más clara, más veloz y mucho más fácil de usar desde el celular.', action: 'Pedir una revisión', message: 'Hola, quiero una revisión de mi sitio web actual', points: [['Gauge', 'Auditoría de velocidad y usabilidad'], ['RefreshCw', 'Rediseño sin perder tu posicionamiento']] },
+  { image: 'https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=2400&q=90', visualImage: '/NEBU-Experiencias-Agencia-Web/images/hero/hero-ai.png', visualAlt: 'Visualización luminosa de inteligencia artificial y datos', visualLabel: 'IA PARA TU NEGOCIO', visualNote: 'Asistente activo 24/7', kicker: 'Automatización inteligente', title: 'Tecnología que atiende a tus clientes mientras tú descansas', copy: 'Diseñamos sitios web rápidos y asistentes de inteligencia artificial para WhatsApp y chat web que responden, orientan y venden las 24 horas.', action: 'Hablar por WhatsApp', message: 'Hola, quiero conocer los servicios de NebuExperiencias', points: [['Zap', 'Sitios que cargan en menos de 2 segundos'], ['Clock', 'Asistentes activos 24/7']] },
+  { image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=2400&q=90', visualImage: '/NEBU-Experiencias-Agencia-Web/images/hero/hero-web-design.png', visualAlt: 'Diseñador trabajando en una experiencia web desde un portátil', visualLabel: 'DISEÑO WEB', visualNote: 'Adaptable a cada pantalla', kicker: 'Diseño y desarrollo', title: 'Sitios web modernos que convierten visitas en clientes', copy: 'Desarrollamos páginas veloces, atractivas y adaptadas a cualquier pantalla, para que tu negocio se vea profesional y venda más.', action: 'Cotizar mi sitio web', message: 'Hola, quiero cotizar un sitio web', points: [['Smartphone', 'Diseño adaptable a celular, tablet y computador'], ['Search', 'Optimizado para aparecer en Google']] },
+  { image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=2400&q=90', visualImage: '/NEBU-Experiencias-Agencia-Web/images/hero/hero-optimization.png', visualAlt: 'Panel digital de analítica con gráficas de rendimiento web', visualLabel: 'OPTIMIZACIÓN WEB', visualNote: 'Más rápido · más claro', kicker: 'Optimización y crecimiento', title: 'Tu sitio actual puede cargar más rápido y vender más', copy: 'Revisamos y rediseñamos tu página para que sea más clara, más veloz y mucho más fácil de usar desde el celular.', action: 'Pedir una revisión', message: 'Hola, quiero una revisión de mi sitio web actual', points: [['Gauge', 'Auditoría de velocidad y usabilidad'], ['RefreshCw', 'Rediseño sin perder tu posicionamiento']] },
 ];
 const services = [
   { icon: 'LayoutTemplate', art: 'service-art-web', title: 'Desarrollo web dinámico', copy: 'Sitios modernos, veloces y adaptados a celular, tablet y computador, listos para convertir visitas en clientes.', points: ['Diseño a la medida de tu marca', 'Optimizado para Google', 'Formularios, reservas y pagos'] },
@@ -133,53 +133,7 @@ function Hero({ reduced }) {
 }
 
 function HeroArtwork({ slide, reduced }) {
-  const animation = reduced ? {} : { y: [0, -9, 0], rotateZ: [-0.8, 0.8, -0.8] };
-  const transition = reduced ? {} : { duration: 6.5, repeat: Infinity, ease: 'easeInOut' };
-  return (
-    <div className="hero-artwork" aria-label={slide.visualAlt} role="img">
-      <motion.div className="hero-artwork-halo" aria-hidden="true" animate={reduced ? {} : { rotate: 360 }} transition={reduced ? {} : { duration: 42, repeat: Infinity, ease: 'linear' }} />
-      <AnimatePresence initial={false} mode="wait">
-        <motion.figure className="hero-artwork-frame" key={slide.visualImage} initial={reduced ? false : { opacity: 0, scale: 0.96, y: 12 }} animate={{ opacity: 1, scale: 1, ...animation }} exit={reduced ? { opacity: 0 } : { opacity: 0, scale: 0.98, y: -8 }} transition={{ opacity: { duration: 0.22 }, scale: { duration: 0.32, ease: EASE }, y: transition.y ? { duration: transition.duration, repeat: transition.repeat, ease: transition.ease } : { duration: 0.25 }, rotateZ: transition.rotateZ ? { duration: transition.duration, repeat: transition.repeat, ease: transition.ease } : { duration: 0.25 } }}>
-          <img className="hero-artwork-image" src={slide.visualImage} alt="" loading="eager" />
-          
-          {/* Glassmorphic Card 1 */}
-          <motion.div 
-            className="hero-artwork-card card-1"
-            initial={reduced ? false : { opacity: 0, x: 30, y: -20 }}
-            animate={{ opacity: 1, x: 0, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2, ease: EASE }}
-          >
-            <span className="card-kicker">{slide.kicker}</span>
-            <p className="card-text">{slide.title.split('/')[0].trim()}</p>
-          </motion.div>
-
-          {/* Glassmorphic Card 2 */}
-          <motion.div 
-            className="hero-artwork-card card-2"
-            initial={reduced ? false : { opacity: 0, x: -30, y: 20 }}
-            animate={{ opacity: 1, x: 0, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4, ease: EASE }}
-          >
-            <span className="card-kicker">{slide.points[0]?.[1]?.split(' ')[0] || 'Recurso'}</span>
-            <p className="card-text">{slide.points[0]?.[1]?.substring(0, 35) || 'Información destacada'}</p>
-          </motion.div>
-
-          <span className="hero-artwork-label"><span className="hero-artwork-live" />{slide.visualLabel}</span>
-          <motion.div className="hero-artwork-note" aria-hidden="true" animate={reduced ? {} : { y: [0, -5, 0] }} transition={reduced ? {} : { duration: 4.8, repeat: Infinity, ease: 'easeInOut' }}>
-            <Icon name={currentVisualIcon(slide.visualLabel)} />
-            <span>{slide.visualNote}</span>
-          </motion.div>
-          <span className="hero-artwork-index" aria-hidden="true">0{slides.indexOf(slide) + 1} / 03</span>
-        </motion.figure>
-      </AnimatePresence>
-    </div>
-  );
-}
-
-function currentVisualIcon(label) {
-  if (label.startsWith('IA')) return 'Bot';
-  if (label.startsWith('DISEÑO')) return 'LayoutTemplate';
-  return 'Gauge';
+  return null;
 }
 
 function VideoButton() {
@@ -357,12 +311,69 @@ function ChatWidget() {
 }
 
 function Footer() {
-  const socials = ['Instagram', 'Facebook', 'LinkedIn', 'YouTube'];
-  return <footer className="site-footer"><div className="container footer-grid">
-    <div className="footer-brand"><img className="logo logo-for-light" src="assets/img/logo-negro.png" alt="NebuExperiencias" width="700" height="301" /><img className="logo logo-for-dark" src="assets/img/logo-blanco.png" alt="" width="700" height="301" aria-hidden="true" /><p>Sitios web y asistentes de IA para negocios que quieren atender mejor.</p></div>
-    <nav aria-label="Enlaces de interés"><h3>Enlaces de interés</h3><ul>{nav.slice(1).map(([id, label]) => <li key={id}><a href={`#${id}`}>{label}</a></li>)}<li><a href="#">Política de privacidad</a></li></ul></nav>
-    <div><h3>Síguenos</h3><ul className="socials">{socials.map((label) => <li key={label}><a className="icon-btn" href="#" aria-label={label}><Share2 aria-hidden="true" /></a></li>)}<li><Wa className="icon-btn" message="Hola, quiero más información" aria-label="WhatsApp"><Icon name="MessageCircle" /></Wa></li></ul></div>
-  </div><div className="container footer-bottom"><p>© {new Date().getFullYear()} NebuExperiencias. Todos los derechos reservados.</p></div></footer>;
+  const socials = [
+    { name: 'Facebook', icon: 'Share2', href: 'https://facebook.com' },
+    { name: 'Instagram', icon: 'Share2', href: 'https://instagram.com' },
+    { name: 'YouTube', icon: 'Share2', href: 'https://youtube.com' },
+    { name: 'GitHub', icon: 'Share2', href: 'https://github.com' },
+    { name: 'LinkedIn', icon: 'Share2', href: 'https://linkedin.com' },
+  ];
+  const policies = [
+    { label: 'Política de privacidad', href: '#privacidad' },
+    { label: 'Términos y condiciones', href: '#terminos' },
+    { label: 'Política de cookies', href: '#cookies' },
+    { label: 'Políticas tecnológicas', href: '#politicas-tech' },
+    { label: 'Derecho de retracción (5 días)', href: '#retraccion' },
+  ];
+  
+  return <footer className="site-footer">
+    <div className="container footer-grid">
+      <div className="footer-brand">
+        <img className="logo logo-for-light" src="assets/img/logo-negro.png" alt="NebuExperiencias" width="700" height="301" />
+        <img className="logo logo-for-dark" src="assets/img/logo-blanco.png" alt="" width="700" height="301" aria-hidden="true" />
+        <p>Sitios web y asistentes de IA para negocios que quieren atender mejor.</p>
+      </div>
+      <nav aria-label="Enlaces de interés">
+        <h3>Enlaces de interés</h3>
+        <ul>
+          {nav.slice(1).map(([id, label]) => <li key={id}><a href={`#${id}`}>{label}</a></li>)}
+        </ul>
+      </nav>
+      <div>
+        <h3>Síguenos</h3>
+        <ul className="socials">
+          {socials.map((social) => (
+            <li key={social.name}>
+              <a className="icon-btn" href={social.href} aria-label={social.name} target="_blank" rel="noopener noreferrer">
+                <Icon name={social.icon} />
+              </a>
+            </li>
+          ))}
+          <li>
+            <Wa className="icon-btn" message="Hola, quiero más información" aria-label="WhatsApp">
+              <Icon name="MessageCircle" />
+            </Wa>
+          </li>
+        </ul>
+      </div>
+    </div>
+    
+    <nav className="footer-policies" aria-label="Políticas y legal">
+      <div className="container">
+        <ul>
+          {policies.map((policy) => (
+            <li key={policy.label}>
+              <a href={policy.href}>{policy.label}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </nav>
+    
+    <div className="container footer-bottom">
+      <p>© {new Date().getFullYear()} NebuExperiencias. Todos los derechos reservados.</p>
+    </div>
+  </footer>;
 }
 
 export default function App() {
