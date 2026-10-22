@@ -8,8 +8,8 @@ export default async function handler(request, response) {
         return response.status(405).json({ error: 'method_not_allowed' });
     }
     const { status, body } = await answerChat(request.body?.messages, {
-        apiKey: process.env.OPENAI_API_KEY,
-        model: process.env.OPENAI_MODEL || undefined,
+        apiKey: process.env.OPENAI_API_KEY?.trim(),
+        model: process.env.OPENAI_MODEL?.trim() || undefined,
     });
     return response.status(status).json(body);
 }
