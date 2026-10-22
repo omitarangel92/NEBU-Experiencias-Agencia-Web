@@ -170,7 +170,7 @@ function ServiceCard({ service, index }) {
   const detailsVisible = !isMobile || expanded;
   const detailsId = `service-details-${index}`;
 
-  return <Reveal as={motion.article} className={`card service ${isMobile ? 'service-mobile' : ''}`} delay={index * 0.08} move={false}>
+  return <Reveal as={motion.article} className={`card service ${index === 0 ? 'service-lead' : ''} ${isMobile ? 'service-mobile' : ''}`} delay={index * 0.08} move={false}>
     <div className={`service-art ${service.art}`} aria-hidden="true" />
     <span className="icon-well"><Icon name={service.icon} /></span>
     <h3>{service.title}</h3>
